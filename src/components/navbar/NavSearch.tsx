@@ -1,12 +1,15 @@
+import { Input } from '../ui/input'
 import React, { type FC } from 'react'
 
 const f = '⇒ NavSearch.tsx (NavSearch):'
 
 const NavSearch: FC = () => {
   return (
-    <div>
-      <h1>NavSearch</h1>
-    </div>
+    <Input
+      type='text'
+      placeholder='find a property...'
+      className='max-w-xs dark:bg-muted'
+    />
   )
 }
 export default NavSearch
