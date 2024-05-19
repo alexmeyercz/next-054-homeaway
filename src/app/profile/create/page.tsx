@@ -2,6 +2,7 @@ import React, { type FC } from 'react'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import FormInput from '@/components/form/FormInput'
 
 const f = '⇒ page.tsx (CreateProfilePage):'
 
@@ -20,14 +21,13 @@ const CreateProfilePage: FC = () => {
           action={createProfileAction}
           className='space-y-2'
         >
-          <div className='space-y-2'>
-            <Label htmlFor='firstName'>First Name</Label>
-            <Input
-              id='firstName'
-              name='firstName'
-              type='text'
-            />
-          </div>
+          <FormInput
+            name='firstName'
+            type='text'
+            required
+            label='First Name'
+          />
+
           <Button
             type='submit'
             size='lg'
