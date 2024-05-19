@@ -12,7 +12,7 @@ const Logo: FC = () => {
       asChild
     >
       <Link href='/'>
-        <LuTent className='h-6 w-6 text-white' />
+        <LuTent className='h-6 w-6' />
       </Link>
     </Button>
   )
