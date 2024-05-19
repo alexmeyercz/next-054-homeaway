@@ -10,7 +10,7 @@ const HomePage: FC = () => {
       <Button
         variant='outline'
         size='lg'
-        className='capitalize m-8'
+        className='m-8 capitalize'
       >
         Click me
       </Button>
