@@ -89,6 +89,12 @@ export default HomePage
 ```
 
 ```sh
+npx shadcn-ui@latest init
+```
+
+then add components
+
+```sh
 npx shadcn-ui@latest add breadcrumb calendar card checkbox dropdown-menu input label popover scroll-area select separator table textarea toast skeleton
 ```
 
@@ -1429,7 +1435,6 @@ import {
 import ImageInputContainer from '@/components/form/ImageInputContainer'
 
 /* image input container */
-
 ;<ImageInputContainer
   image={profile.profileImage}
   name={profile.username}
