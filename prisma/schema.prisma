@@ -10,14 +10,26 @@
 // npm install @prisma/client
 // Init
 // npx prisma init
+// npx prisma migrate dev --name init - create migration (init is the name of the migration - can be anything)
+// npx prisma db push - apply migration (push the migration to the database)
+
+//  npx prisma studio - open prisma studio
 
 // Solution of db exhaust in utils/db.ts
+
+// Supabase / Prisma docs: https://supabase.com/partners/integrations/prisma
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model TestProfile {
+  id   String @id @default(cuid())
+  name String
 }
