@@ -3,18 +3,9 @@ import React, { type FC } from 'react'
 import FormInput from '@/components/form/FormInput'
 import { SubmitButton } from '@/components/form/Buttons'
 import FormContainer from '@/components/form/FormContainer'
+import { createProfileAction } from '@/utils/actions'
 
 const f = '⇒ page.tsx (CreateProfilePage):'
-
-const createProfileAction = async (prevState: any, formData: FormData) => {
-  'use server'
-  const firstName = formData.get('firstName') as string
-  console.log(f, 'firstName →', firstName)
-  if (firstName !== 'shakeAndBake') {
-    return { message: 'Invalid first name' }
-  }
-  return { message: 'Profile created' }
-}
 
 const CreateProfilePage: FC = () => {
   return (
@@ -26,19 +17,16 @@ const CreateProfilePage: FC = () => {
             <FormInput
               name='firstName'
               type='text'
-              
               label='First Name'
             />
             <FormInput
               name='lastName'
               type='text'
-              
               label='Last Name'
             />
             <FormInput
               name='username'
               type='text'
-              
               label='Username'
             />
             <SubmitButton text='Create Profile' />
