@@ -12,17 +12,19 @@ type SubmitButtonProps = {
   className?: string
   text?: string
 }
+
 export const SubmitButton: FC<SubmitButtonProps> = ({
   className = '',
   text = 'Submit',
 }) => {
   const { pending } = useFormStatus()
+
   return (
     <Button
       type='submit'
       className={cn('capitalize ', className)}
       disabled={pending}
-      size={'lg'}
+      size='lg'
     >
       {pending ? (
         <>
