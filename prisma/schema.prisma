@@ -12,6 +12,7 @@
 // npx prisma init
 // npx prisma migrate dev --name init - create migration (init is the name of the migration - can be anything)
 // npx prisma db push - apply migration (push the migration to the database)
+// you can use it without anything else, when the schema is updated, it will remove the old tables if applicable
 
 //  npx prisma studio - open prisma studio
 
@@ -29,7 +30,14 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model TestProfile {
-  id   String @id @default(cuid())
-  name String
+model Profile {
+  id           String   @id @default(uuid())
+  clerkId      String   @unique
+  firstName    String
+  lastName     String
+  username     String
+  email        String
+  profileImage String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
