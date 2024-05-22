@@ -4,10 +4,16 @@ import FormInput from '@/components/form/FormInput'
 import { SubmitButton } from '@/components/form/Buttons'
 import FormContainer from '@/components/form/FormContainer'
 import { createProfileAction } from '@/utils/actions'
+import { currentUser } from '@clerk/nextjs/server'
+import { redirect } from 'next/navigation'
 
 const f = '⇒ page.tsx (CreateProfilePage):'
 
-const CreateProfilePage: FC = () => {
+const CreateProfilePage: FC = async () => {
+  const user = await currentUser()
+  if (user?.privateMetadata.hasProfile) {
+    redirect('/profile')
+  }
   return (
     <div>
       <h1 className='mb-8 text-2xl font-semibold capitalize'>new user</h1>
