@@ -5,6 +5,7 @@ import db from '@/utils/db'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { auth, clerkClient, currentUser } from '@clerk/nextjs/server'
+import { paths } from './paths'
 
 const f = '⇒ actions.ts:'
 
@@ -14,9 +15,16 @@ const getAuthUser = async () => {
     throw new Error('Use must be logged in to to access this route.')
   }
   if (!user.privateMetadata.hasProfile) {
-    redirect('/profile/create')
+    redirect(paths.profileCreate())
   }
   return user
+}
+
+const renderError = (error: unknown): { message: string } => {
+  console.log(f, 'error -> ', error)
+  return {
+    message: error instanceof Error ? error.message : 'An error occurred',
+  }
 }
 
 export const createProfileAction = async (
@@ -44,11 +52,32 @@ export const createProfileAction = async (
     })
     return { message: 'profile created' }
   } catch (error) {
-    console.log(f, 'error →', error)
-    return {
-      message: error instanceof Error ? error.message : 'An error occurred',
-    }
+    return renderError(error)
   }
+}
+
+export const updateProfileAction = async (
+  prevState: any,
+  formData: FormData,
+): Promise<{ message: string }> => {
+  const user = await getAuthUser()
+
+  try {
+    const rawData = Object.fromEntries(formData)
+    const validatedFields = profileSchema.parse(rawData)
+    await db.profile.update({
+      where: {
+        clerkId: user.id,
+      },
+      data: validatedFields,
+    })
+    revalidatePath(paths.profile())
+    return { message: 'profile updated successfully' }
+  } catch (error) {
+    return renderError(error)
+  }
+  // placeholder action
+  return { message: 'update profile action' }
 }
 
 export const fetchProfileImage = async () => {
@@ -69,15 +98,7 @@ export const fetchProfile = async () => {
     where: { clerkId: user.id },
   })
   if (!profile) {
-    redirect('/profile/create')
+    redirect(paths.profileCreate())
   }
   return profile
-}
-
-export const updateProfileAction = async (
-  prevState: any,
-  formData: FormData,
-): Promise<{ message: string }> => {
-  // placeholder action
-  return { message: 'update profile action' }
 }
