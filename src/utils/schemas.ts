@@ -7,3 +7,17 @@ export const profileSchema = z.object({
   username: z.string().min(1, { message: 'Username is required' }),
 })
 export type ProfileSchemaType = ZodSchema<typeof profileSchema>
+
+export const validateWithZodSchema = <T>(
+  schema: ZodSchema<T>,
+  data: unknown,
+): T => {
+  const result = schema.safeParse(data)
+  if (!result.success) {
+    const errors = result.error.errors.map((error) => {
+      return error.message
+    })
+    throw new Error(errors.join(', '))
+  }
+  return result.data
+}

@@ -1,6 +1,6 @@
 'use server'
 
-import { profileSchema } from '@/utils/schemas'
+import { profileSchema, validateWithZodSchema } from '@/utils/schemas'
 import db from '@/utils/db'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -37,7 +37,7 @@ export const createProfileAction = async (
 
     console.log(f, 'user →', user)
     const rawData = Object.fromEntries(formData)
-    const validatedFields = profileSchema.parse(rawData)
+    const validatedFields = validateWithZodSchema(profileSchema, rawData)
     await db.profile.create({
       data: {
         clerkId: user.id,
@@ -65,14 +65,8 @@ export const updateProfileAction = async (
   try {
     const rawData = Object.fromEntries(formData)
     console.log(f, 'rawData →', rawData)
-    const validatedFields = profileSchema.safeParse(rawData)
-    console.log(f, 'validatedFields →', validatedFields)
-    if (!validatedFields.success) {
-      const errors = validatedFields.error.errors.map((error) => {
-        return error.message
-      })
-      throw new Error(errors.join(', '))
-    }
+
+    const validatedFields = validateWithZodSchema(profileSchema, rawData)
     await db.profile.update({
       where: {
         clerkId: user.id,
