@@ -64,7 +64,15 @@ export const updateProfileAction = async (
 
   try {
     const rawData = Object.fromEntries(formData)
-    const validatedFields = profileSchema.parse(rawData)
+    console.log(f, 'rawData →', rawData)
+    const validatedFields = profileSchema.safeParse(rawData)
+    console.log(f, 'validatedFields →', validatedFields)
+    if (!validatedFields.success) {
+      const errors = validatedFields.error.errors.map((error) => {
+        return error.message
+      })
+      throw new Error(errors.join(', '))
+    }
     await db.profile.update({
       where: {
         clerkId: user.id,
