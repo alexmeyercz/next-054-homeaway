@@ -31,7 +31,7 @@ const getAuthUser = async () => {
 }
 
 const renderError = (error: unknown): { message: string } => {
-  console.log(f, 'error -> ', error)
+  console.log(error)
   return {
     message: error instanceof Error ? error.message : 'An error occurred',
   }
@@ -42,16 +42,26 @@ const renderError = (error: unknown): { message: string } => {
 export const createPropertyAction = async (
   prevState: any,
   formData: FormData,
-): Promise<{ message: string }> => {
+): Promise<{ message: string | void }> => {
   const user = await getAuthUser()
   try {
     const rawData = Object.fromEntries(formData)
     const validatedFields = validateWithZodSchema(propertySchema, rawData)
-    return { message: 'property created' }
-    // redirect(paths.home())
+    const file = formData.get('image') as File
+    const validatedFile = validateWithZodSchema(imageSchema, { image: file })
+    const fullPath = await uploadImage(validatedFile.image)
+
+    await db.property.create({
+      data: {
+        ...validatedFields,
+        image: fullPath,
+        profileId: user.id,
+      },
+    })
   } catch (error) {
     return renderError(error)
   }
+  redirect(paths.home())
 }
 
 /* ----------------------------------------------------------- */
@@ -60,13 +70,12 @@ export const createPropertyAction = async (
 export const createProfileAction = async (
   prevState: any,
   formData: FormData,
-) => {
+): Promise<{ message: string }> => {
   try {
     const user = await currentUser()
     if (!user) throw new Error('user not found')
 
-    console.log(f, 'user →', user)
-    const rawData = Object.fromEntries(formData)
+    const rawData = Object.fromEntries(formData.entries())
     const validatedFields = validateWithZodSchema(profileSchema, rawData)
     await db.profile.create({
       data: {
@@ -93,8 +102,7 @@ export const updateProfileAction = async (
   const user = await getAuthUser()
 
   try {
-    const rawData = Object.fromEntries(formData)
-    console.log(f, 'rawData →', rawData)
+    const rawData = Object.fromEntries(formData.entries())
 
     const validatedFields = validateWithZodSchema(profileSchema, rawData)
     await db.profile.update({
@@ -108,8 +116,6 @@ export const updateProfileAction = async (
   } catch (error) {
     return renderError(error)
   }
-  // placeholder action
-  return { message: 'update profile action' }
 }
 
 export const fetchProfileImage = async () => {

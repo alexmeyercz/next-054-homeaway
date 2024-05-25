@@ -26,7 +26,11 @@ const CounterInput: FC<CounterInputProps> = ({ detail, defaultValue = 0 }) => {
 
   return (
     <Card className='mb-4'>
-      {/* input */}
+      <input
+        type='hidden'
+        name={detail}
+        value={count}
+      />
       <CardHeader className='gapy-5 flex flex-col'>
         <div className='flex flex-wrap items-center justify-between'>
           <div className='flex flex-col'>

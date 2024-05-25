@@ -9,6 +9,7 @@ import TextAreaInput from '@/components/form/TextAreaInput'
 import CountriesInput from '@/components/form/CountriesInput'
 import CounterInput from '@/components/form/CounterInput'
 import AmenitiesInput from '@/components/form/AmenitiesInput'
+import ImageInput from '@/components/form/ImageInput'
 
 const f = '⇒ page.tsx (CreateRentalsPage):'
 
@@ -41,12 +42,15 @@ const CreateRentalsPage: FC = () => {
           />
           <div className='grid gap-8 sm:grid-cols-2'>
             <CountriesInput />
+            <ImageInput name='image' />
           </div>
           <h3 className='mt-8'>Accommodation Details</h3>
           <CounterInput detail='guests' />
           <CounterInput detail='bedrooms' />
           <CounterInput detail='beds' />
           <CounterInput detail='baths' />
+
+          <h3 className='mt-8'>Amenities</h3>
           <AmenitiesInput />
           <SubmitButton
             text='Create Property'
