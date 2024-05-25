@@ -5,6 +5,7 @@ import { createPropertyAction } from '@/utils/actions'
 import { SubmitButton } from '@/components/form/Buttons'
 import PriceInput from '@/components/form/PriceInput'
 import CategoriesInput from '@/components/form/CategoriesInput'
+import TextAreaInput from '@/components/form/TextAreaInput'
 
 const f = '⇒ page.tsx (CreateRentalsPage):'
 
@@ -31,6 +32,10 @@ const CreateRentalsPage: FC = () => {
             <PriceInput defaultValue={200} />
             <CategoriesInput name='category' />
           </div>
+          <TextAreaInput
+            name='description'
+            label='Property Description (10 - 1000 words)'
+          />
           <SubmitButton
             text='Create Property'
             className='mt-12'
