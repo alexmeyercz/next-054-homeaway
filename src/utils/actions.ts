@@ -42,7 +42,7 @@ const renderError = (error: unknown): { message: string } => {
 export const createPropertyAction = async (
   prevState: any,
   formData: FormData,
-): Promise<{ message: string | void }> => {
+): Promise<{ message: string }> => {
   const user = await getAuthUser()
   try {
     const rawData = Object.fromEntries(formData)
@@ -58,6 +58,7 @@ export const createPropertyAction = async (
         profileId: user.id,
       },
     })
+    return { message: 'Property created successfully' }
   } catch (error) {
     return renderError(error)
   }
@@ -75,7 +76,7 @@ export const createProfileAction = async (
     const user = await currentUser()
     if (!user) throw new Error('user not found')
 
-    const rawData = Object.fromEntries(formData.entries())
+    const rawData = Object.fromEntries(formData)
     const validatedFields = validateWithZodSchema(profileSchema, rawData)
     await db.profile.create({
       data: {
@@ -102,7 +103,7 @@ export const updateProfileAction = async (
   const user = await getAuthUser()
 
   try {
-    const rawData = Object.fromEntries(formData.entries())
+    const rawData = Object.fromEntries(formData)
 
     const validatedFields = validateWithZodSchema(profileSchema, rawData)
     await db.profile.update({
