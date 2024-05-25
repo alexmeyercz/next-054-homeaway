@@ -1,19 +1,29 @@
-import { fetchProfile, updateProfileAction } from '@/utils/actions'
+import {
+  fetchProfile,
+  updateProfileAction,
+  updateProfileImageAction,
+} from '@/utils/actions'
 import React, { type FC } from 'react'
 import FormContainer from '@/components/form/FormContainer'
 import FormInput from '@/components/form/FormInput'
 import { createProfileAction } from '@/utils/actions'
 import { SubmitButton } from '@/components/form/Buttons'
+import ImageInputContainer from '@/components/form/ImageInputContainer'
 
 const f = '⇒ page.tsx (ProfilePage):'
 
 const ProfilePage: FC = async () => {
   const profile = await fetchProfile()
-  // console.log(f, 'profile →', profile)
   return (
     <section>
       <h1>edit profile</h1>
-      <div className='max-w-lg rounded-md border p-8'>
+      <div className='max-w-lg space-y-6 rounded-md border p-8'>
+        <ImageInputContainer
+          image={profile.profileImage}
+          name={profile.username}
+          action={updateProfileImageAction}
+          text='Update Profile Image'
+        />
         <FormContainer action={updateProfileAction}>
           <div className='space-y-4'>
             <FormInput

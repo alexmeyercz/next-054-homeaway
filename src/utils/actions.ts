@@ -104,3 +104,10 @@ export const fetchProfile = async () => {
   }
   return profile
 }
+
+export const updateProfileImageAction = async (
+  prevState: any,
+  formData: FormData,
+): Promise<{ message: string }> => {
+  return { message: 'Profile image updated successfully' }
+}

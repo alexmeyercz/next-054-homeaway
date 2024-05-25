@@ -8,14 +8,18 @@ import { cn } from '@/lib/utils'
 
 const f = '⇒ Buttons.tsx (Buttons):'
 
+type btnSize = 'sm' | 'lg' | 'default'
+
 type SubmitButtonProps = {
   className?: string
   text?: string
+  size?: btnSize
 }
 
 export const SubmitButton: FC<SubmitButtonProps> = ({
   className = '',
   text = 'Submit',
+  size = 'lg',
 }) => {
   const { pending } = useFormStatus()
 
@@ -24,7 +28,7 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
       type='submit'
       className={cn('capitalize ', className)}
       disabled={pending}
-      size='lg'
+      size={size}
     >
       {pending ? (
         <>
