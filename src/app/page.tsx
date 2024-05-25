@@ -1,20 +1,25 @@
-import { Button } from '@/components/ui/button'
+import CategoriesList from '@/components/home/CategoriesList'
+import PropertiesContainer from '@/components/home/PropertiesContainer'
 import React, { type FC } from 'react'
 
 const f = '⇒ page.tsx (HomePage):'
 
-const HomePage: FC = () => {
+type HomePageProps = Readonly<{
+  searchParams: { category?: string; search?: string }
+}>
+const HomePage: FC<HomePageProps> = ({ searchParams }) => {
+  console.log(f, 'searchParams →', searchParams)
   return (
-    <div>
-      <h1>HomePage</h1>
-      <Button
-        variant='outline'
-        size='lg'
-        className='m-8 capitalize'
-      >
-        Click me
-      </Button>
-    </div>
+    <section>
+      <CategoriesList
+        category={searchParams.category}
+        search={searchParams.search}
+      />
+      <PropertiesContainer
+        category={searchParams.category}
+        search={searchParams.search}
+      />
+    </section>
   )
 }
 export default HomePage
