@@ -11,3 +11,8 @@ export type PropertyCardProps = {
   country: string
   price: number
 }
+
+export type SearchParamsType = {
+  category?: string
+  search?: string
+}

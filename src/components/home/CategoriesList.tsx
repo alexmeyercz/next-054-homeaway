@@ -2,9 +2,12 @@ import React, { type FC } from 'react'
 
 const f = '⇒ CategoriesList.tsx:'
 
-type CategoriesListProps = Readonly<{}>
+type CategoriesListProps = Readonly<{
+  category?: string
+  search?: string
+}>
 
-const CategoriesList: FC<CategoriesListProps> = () => {
+const CategoriesList: FC<CategoriesListProps> = ({ category, search }) => {
   return (
     <div>
       <h1>CategoriesList</h1>

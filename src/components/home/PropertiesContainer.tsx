@@ -2,9 +2,12 @@ import React, { type FC } from 'react'
 
 const f = '⇒ PropertiesContainer.tsx:'
 
-type PropertiesContainerProps = Readonly<{}>
+type PropertiesContainerProps = { category?: string; search?: string }
 
-const PropertiesContainer: FC<PropertiesContainerProps> = () => {
+const PropertiesContainer: FC<PropertiesContainerProps> = ({
+  category,
+  search,
+}) => {
   return (
     <div>
       <h1>PropertiesContainer</h1>
