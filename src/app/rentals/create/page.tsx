@@ -4,6 +4,7 @@ import FormContainer from '@/components/form/FormContainer'
 import { createPropertyAction } from '@/utils/actions'
 import { SubmitButton } from '@/components/form/Buttons'
 import PriceInput from '@/components/form/PriceInput'
+import CategoriesInput from '@/components/form/CategoriesInput'
 
 const f = '⇒ page.tsx (CreateRentalsPage):'
 
@@ -28,6 +29,7 @@ const CreateRentalsPage: FC = () => {
               defaultValue='Dream Getaway Awaits You Here!'
             />
             <PriceInput defaultValue={200} />
+            <CategoriesInput name='category' />
           </div>
           <SubmitButton
             text='Create Property'
