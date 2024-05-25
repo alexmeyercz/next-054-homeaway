@@ -7,6 +7,7 @@ import PriceInput from '@/components/form/PriceInput'
 import CategoriesInput from '@/components/form/CategoriesInput'
 import TextAreaInput from '@/components/form/TextAreaInput'
 import CountriesInput from '@/components/form/CountriesInput'
+import CounterInput from '@/components/form/CounterInput'
 
 const f = '⇒ page.tsx (CreateRentalsPage):'
 
@@ -40,6 +41,12 @@ const CreateRentalsPage: FC = () => {
           <div className='grid gap-8 sm:grid-cols-2'>
             <CountriesInput />
           </div>
+          <h3>Accommodation Details</h3>
+          <CounterInput detail='guests' />
+          <CounterInput detail='bedrooms' />
+          <CounterInput detail='beds' />
+          <CounterInput detail='baths' />
+
           <SubmitButton
             text='Create Property'
             className='mt-12'
