@@ -6,6 +6,7 @@ import { SubmitButton } from '@/components/form/Buttons'
 import PriceInput from '@/components/form/PriceInput'
 import CategoriesInput from '@/components/form/CategoriesInput'
 import TextAreaInput from '@/components/form/TextAreaInput'
+import CountriesInput from '@/components/form/CountriesInput'
 
 const f = '⇒ page.tsx (CreateRentalsPage):'
 
@@ -36,6 +37,9 @@ const CreateRentalsPage: FC = () => {
             name='description'
             label='Property Description (10 - 1000 words)'
           />
+          <div className='grid gap-8 sm:grid-cols-2'>
+            <CountriesInput />
+          </div>
           <SubmitButton
             text='Create Property'
             className='mt-12'
