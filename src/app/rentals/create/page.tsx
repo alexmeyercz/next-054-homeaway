@@ -3,6 +3,7 @@ import FormInput from '@/components/form/FormInput'
 import FormContainer from '@/components/form/FormContainer'
 import { createPropertyAction } from '@/utils/actions'
 import { SubmitButton } from '@/components/form/Buttons'
+import PriceInput from '@/components/form/PriceInput'
 
 const f = '⇒ page.tsx (CreateRentalsPage):'
 
@@ -26,6 +27,7 @@ const CreateRentalsPage: FC = () => {
               label='Tagline (30 limit)'
               defaultValue='Dream Getaway Awaits You Here!'
             />
+            <PriceInput defaultValue={200} />
           </div>
           <SubmitButton
             text='Create Property'

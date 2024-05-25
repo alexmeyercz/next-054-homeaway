@@ -2,7 +2,7 @@ import React, { type FC } from 'react'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 
-const f = '⇒ FormInput.tsx (FormInput):'
+const f = '⇒ FormInput.tsx:'
 
 type FormInputProps = {
   name: string
