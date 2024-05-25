@@ -21,3 +21,26 @@ export const validateWithZodSchema = <T>(
   }
   return result.data
 }
+
+const validateFile = () => {
+  const maxUploadSize = 1024 * 1024 * 2 // 2MB
+  const acceptedFileTypes = ['image/']
+  return z
+    .instanceof(File)
+    .refine((file) => {
+      return !file || file.size <= maxUploadSize
+    }, 'File size must be less than 2MB')
+    .refine((file) => {
+      return (
+        !file ||
+        acceptedFileTypes.some((type) => {
+          return file.type.startsWith(type)
+        })
+      )
+    }, 'File must be an image')
+}
+
+export const imageSchema = z.object({
+  image: validateFile(),
+})
+export type ImageSchemaType = ZodSchema<typeof imageSchema>

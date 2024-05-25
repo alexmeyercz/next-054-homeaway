@@ -1,6 +1,10 @@
 'use server'
 
-import { profileSchema, validateWithZodSchema } from '@/utils/schemas'
+import {
+  imageSchema,
+  profileSchema,
+  validateWithZodSchema,
+} from '@/utils/schemas'
 import db from '@/utils/db'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -109,5 +113,8 @@ export const updateProfileImageAction = async (
   prevState: any,
   formData: FormData,
 ): Promise<{ message: string }> => {
+  const image = formData.get('image') as File
+  const validateFields = validateWithZodSchema(imageSchema, { image })
+  console.log(f, 'validateFields →', validateFields)
   return { message: 'Profile image updated successfully' }
 }
