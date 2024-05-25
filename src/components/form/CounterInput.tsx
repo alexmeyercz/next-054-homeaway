@@ -13,13 +13,12 @@ type CounterInputProps = Readonly<{
   defaultValue?: number
 }>
 
-const CounterInput: FC<CounterInputProps> = (props) => {
-  const { detail, defaultValue } = props
-  const [count, setCount] = useState(defaultValue || 0)
-  const increaseCount = () => {
+const CounterInput: FC<CounterInputProps> = ({ detail, defaultValue = 0 }) => {
+  const [count, setCount] = useState<number>(defaultValue || 0)
+  const increaseCount: () => void = () => {
     setCount((prevCount) => prevCount + 1)
   }
-  const decreaseCount = () => {
+  const decreaseCount: () => void = () => {
     setCount((prevCount) => {
       return prevCount > 0 ? prevCount - 1 : 0
     })
