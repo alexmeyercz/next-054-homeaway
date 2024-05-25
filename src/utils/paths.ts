@@ -1,4 +1,7 @@
 export const paths = {
+  home() {
+    return '/'
+  },
   profile() {
     return '/profile'
   },

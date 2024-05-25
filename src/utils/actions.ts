@@ -3,6 +3,7 @@
 import {
   imageSchema,
   profileSchema,
+  propertySchema,
   validateWithZodSchema,
 } from '@/utils/schemas'
 import db from '@/utils/db'
@@ -13,6 +14,10 @@ import { paths } from './paths'
 import { uploadImage } from './supabase'
 
 const f = '⇒ actions.ts:'
+
+/* ----------------------------------------------------------- */
+/*                            GLOBAL                           */
+/* ----------------------------------------------------------- */
 
 const getAuthUser = async () => {
   const user = await currentUser()
@@ -31,7 +36,27 @@ const renderError = (error: unknown): { message: string } => {
     message: error instanceof Error ? error.message : 'An error occurred',
   }
 }
+/* ----------------------------------------------------------- */
+/*                          PROPERTIES                         */
+/* ----------------------------------------------------------- */
+export const createPropertyAction = async (
+  prevState: any,
+  formData: FormData,
+): Promise<{ message: string }> => {
+  const user = await getAuthUser()
+  try {
+    const rawData = Object.fromEntries(formData)
+    const validatedFields = validateWithZodSchema(propertySchema, rawData)
+    return { message: 'property created' }
+    // redirect(paths.home())
+  } catch (error) {
+    return renderError(error)
+  }
+}
 
+/* ----------------------------------------------------------- */
+/*                           PROFILE                           */
+/* ----------------------------------------------------------- */
 export const createProfileAction = async (
   prevState: any,
   formData: FormData,
