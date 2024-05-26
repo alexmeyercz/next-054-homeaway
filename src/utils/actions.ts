@@ -91,6 +91,7 @@ export const fetchProperties = async ({
     },
     orderBy: { createdAt: 'desc' },
   })
+  return properties
 }
 
 /* ----------------------------------------------------------- */
