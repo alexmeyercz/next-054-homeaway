@@ -59,6 +59,9 @@
   h1 {
     @apply mb-8 text-2xl font-semibold capitalize;
   }
+  h2 {
+    @apply mb-6 text-xl font-semibold;
+  }
   h3 {
     @apply mb-4 text-lg font-medium;
   }
