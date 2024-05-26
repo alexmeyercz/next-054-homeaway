@@ -1,5 +1,6 @@
 import { PropertyCardProps } from '@/utils/types'
 import React, { type FC } from 'react'
+import PropertyCard from '@/components/card/PropertyCard'
 
 const f = '⇒ PropertiesList.tsx:'
 
@@ -9,9 +10,16 @@ type PropertiesListProps = Readonly<{
 
 const PropertiesList: FC<PropertiesListProps> = ({ properties }) => {
   return (
-    <div>
-      <h1>PropertiesList</h1>
-    </div>
+    <section>
+      {properties.map((property) => {
+        return (
+          <PropertyCard
+            key={property.id}
+            property={property}
+          />
+        )
+      })}
+    </section>
   )
 }
 export default PropertiesList
