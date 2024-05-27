@@ -16,7 +16,7 @@ const PropertiesContainer: FC<PropertiesContainerProps> = async ({
     category,
     search,
   })
-  console.log(f, 'properties →', properties)
+
   if (properties.length === 0) {
     return (
       <EmptyList

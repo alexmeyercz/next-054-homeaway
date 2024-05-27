@@ -13,8 +13,7 @@ type CategoriesListProps = Readonly<{
 
 const CategoriesList: FC<CategoriesListProps> = ({ category, search }) => {
   const searchTerm = search ? `&search=${search}` : ''
-  console.log(f, 'searchTerm →', searchTerm)
-  console.log(f, 'category →', category)
+
   return (
     <section>
       <ScrollArea className='py-6'>
