@@ -36,6 +36,10 @@ const PropertyCard: FC<PropertyCardComponentProps> = ({ property }) => {
         <div className='flex items-center justify-between'>
           <h3>{name.substring(0, 30)}</h3>
           {/* property rating */}
+          <PropertyRating
+            propertyId={propertyId}
+            inPage={false}
+          />
         </div>
         <p className='mt-1 text-sm text-muted-foreground'>
           {tagline.substring(0, 40)}
