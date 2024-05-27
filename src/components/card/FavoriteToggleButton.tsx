@@ -1,6 +1,8 @@
 import React, { type FC } from 'react'
 import { Button } from '@/components/ui/button'
 import { FaHeart } from 'react-icons/fa'
+import { auth } from '@clerk/nextjs/server'
+import { CardSignInButton } from '@/components/form/Buttons'
 
 const f = '⇒ FavoriteToggleButton.tsx:'
 
@@ -11,6 +13,10 @@ type FavoriteToggleButtonProps = Readonly<{
 const FavoriteToggleButton: FC<FavoriteToggleButtonProps> = ({
   propertyId,
 }) => {
+  const { userId } = auth()
+  if (!userId) {
+    return <CardSignInButton />
+  }
   return (
     <Button
       size='icon'

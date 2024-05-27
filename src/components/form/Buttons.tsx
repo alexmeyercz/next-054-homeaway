@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/button'
 import { LoaderCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+import { SignInButton } from '@clerk/nextjs'
+import { FaRegHeart, FaHeart } from 'react-icons/fa'
+
 const f = '⇒ Buttons.tsx (Buttons):'
 
 type btnSize = 'sm' | 'lg' | 'default'
@@ -39,5 +42,21 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
         <>{text}</>
       )}
     </Button>
+  )
+}
+
+export const CardSignInButton = () => {
+  return (
+    <SignInButton mode='modal'>
+      <Button
+        type='button'
+        size='icon'
+        variant='outline'
+        className='cursor-pointer p-2'
+        asChild
+      >
+        <FaRegHeart />
+      </Button>
+    </SignInButton>
   )
 }
