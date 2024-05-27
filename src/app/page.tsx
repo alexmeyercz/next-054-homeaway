@@ -1,7 +1,8 @@
+import LoadingCards from '@/components/card/LoadingCards'
 import CategoriesList from '@/components/home/CategoriesList'
 import PropertiesContainer from '@/components/home/PropertiesContainer'
 import { SearchParamsType } from '@/utils/types'
-import React, { type FC } from 'react'
+import React, { Suspense, type FC } from 'react'
 
 const f = '⇒ page.tsx (HomePage):'
 
@@ -17,10 +18,12 @@ const HomePage: FC<HomePageProps> = ({ searchParams }) => {
         category={category}
         search={search}
       />
-      <PropertiesContainer
-        category={category}
-        search={search}
-      />
+      <Suspense fallback={<LoadingCards />}>
+        <PropertiesContainer
+          category={category}
+          search={search}
+        />
+      </Suspense>
     </section>
   )
 }

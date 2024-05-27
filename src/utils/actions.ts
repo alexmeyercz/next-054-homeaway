@@ -73,6 +73,8 @@ export const fetchProperties = async ({
   search = '',
   category,
 }: fetchPropertiesProps) => {
+  // add artificial delay
+  // await new Promise((resolve) => setTimeout(resolve, 3000))
   const properties = await db.property.findMany({
     where: {
       category,
