@@ -49,6 +49,7 @@ const PropertyCard: FC<PropertyCardComponentProps> = ({ property }) => {
             <span>{formatCurrency(price)} night</span>
           </p>
           {/* country and flag */}
+          <CountryFlagAndName countryCode={country} />
         </div>
       </Link>
       <div className='z-5 absolute right-5 top-5'>
