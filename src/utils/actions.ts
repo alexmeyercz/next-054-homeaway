@@ -32,7 +32,7 @@ const getAuthUser = async () => {
 }
 
 const renderError = (error: unknown): { message: string } => {
-  console.log(f, 'error →', error)
+  console.error(f, 'getAuthUser(): error →', error)
   return {
     message: error instanceof Error ? error.message : 'An error occurred',
   }
@@ -214,14 +214,33 @@ export const fetchFavoriteId = async ({ propertyId }: fetchFavoriteIdProps) => {
 
   return favorite?.id || null
 }
+
 export const toggleFavoriteAction = async (prevState: {
   propertyId: string
   favoriteId: string | null
   pathname: string
 }) => {
+  const user = await getAuthUser()
   const { propertyId, favoriteId, pathname } = prevState
-  console.log(f, 'toggleFavoriteAction(): propertyId →', propertyId)
-  console.log(f, 'toggleFavoriteAction(): favoriteId →', favoriteId)
-  console.log(f, 'toggleFavoriteAction(): pathname →', pathname)
-  return { message: 'Toggle Favorite' }
+
+  try {
+    if (favoriteId) {
+      await db.favorite.delete({
+        where: {
+          id: favoriteId,
+        },
+      })
+    } else {
+      await db.favorite.create({
+        data: {
+          propertyId,
+          profileId: user.id,
+        },
+      })
+    }
+    revalidatePath(pathname)
+    return { message: favoriteId ? 'Removed from Faves' : 'Added to Faves' }
+  } catch (error) {
+    return renderError(error)
+  }
 }
