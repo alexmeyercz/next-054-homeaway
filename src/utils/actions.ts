@@ -32,7 +32,7 @@ const getAuthUser = async () => {
 }
 
 const renderError = (error: unknown): { message: string } => {
-  console.log(error)
+  console.log(f, 'error →', error)
   return {
     message: error instanceof Error ? error.message : 'An error occurred',
   }
@@ -211,9 +211,17 @@ export const fetchFavoriteId = async ({ propertyId }: fetchFavoriteIdProps) => {
       id: true,
     },
   })
-  console.log(f, 'favorite →', favorite)
+
   return favorite?.id || null
 }
-export const toggleFavoriteAction = async ({}) => {
+export const toggleFavoriteAction = async (prevState: {
+  propertyId: string
+  favoriteId: string | null
+  pathname: string
+}) => {
+  const { propertyId, favoriteId, pathname } = prevState
+  console.log(f, 'toggleFavoriteAction(): propertyId →', propertyId)
+  console.log(f, 'toggleFavoriteAction(): favoriteId →', favoriteId)
+  console.log(f, 'toggleFavoriteAction(): pathname →', pathname)
   return { message: 'Toggle Favorite' }
 }
