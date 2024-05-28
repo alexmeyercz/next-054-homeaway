@@ -6,6 +6,7 @@ import PropertyRating from '@/components/card/PropertyRating'
 import FavoriteToggleButton from '@/components/card/FavoriteToggleButton'
 import { PropertyCardProps } from '@/utils/types'
 import { formatCurrency } from '@/utils/format'
+import { paths } from '@/utils/paths'
 
 const f = '⇒ PropertyCard.tsx:'
 
@@ -15,7 +16,7 @@ type PropertyCardComponentProps = Readonly<{
 
 const PropertyCard: FC<PropertyCardComponentProps> = ({ property }) => {
   const { id: propertyId, image, name, tagline, country, price } = property
-  const linkProps: LinkProps = { href: `/property/${propertyId}` }
+  const linkProps: LinkProps = { href: paths.property(propertyId) }
   const imageProps: Omit<ImageProps, 'alt'> = {
     src: image,
     fill: true,

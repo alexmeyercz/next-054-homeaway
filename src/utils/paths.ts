@@ -14,4 +14,7 @@ export const paths = {
   rentalsCreate() {
     return '/rentals/create'
   },
+  property(id: string) {
+    return `/properties/${id}`
+  },
 }
