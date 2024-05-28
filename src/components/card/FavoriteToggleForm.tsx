@@ -2,9 +2,15 @@ import React, { type FC } from 'react'
 
 const f = '⇒ FavoriteToggleForm.tsx:'
 
-type FavoriteToggleFormProps = Readonly<{}>
+type FavoriteToggleFormProps = Readonly<{
+  favoriteId: string | null
+  propertyId: string
+}>
 
-const FavoriteToggleForm: FC<FavoriteToggleFormProps> = () => {
+const FavoriteToggleForm: FC<FavoriteToggleFormProps> = ({
+  favoriteId,
+  propertyId,
+}) => {
   return (
     <div>
       <h1>FavoriteToggleForm</h1>

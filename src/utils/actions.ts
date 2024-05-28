@@ -12,6 +12,7 @@ import { redirect } from 'next/navigation'
 import { auth, clerkClient, currentUser } from '@clerk/nextjs/server'
 import { paths } from './paths'
 import { uploadImage } from './supabase'
+import { NextFontManifestPlugin } from 'next/dist/build/webpack/plugins/next-font-manifest-plugin'
 
 const f = '⇒ actions.ts:'
 
@@ -191,4 +192,28 @@ export const updateProfileImageAction = async (
   } catch (error) {
     return renderError(error)
   }
+}
+
+/* ----------------------------------------------------------- */
+/*                          FAVORITES                          */
+/* ----------------------------------------------------------- */
+type fetchFavoriteIdProps = {
+  propertyId: string
+}
+export const fetchFavoriteId = async ({ propertyId }: fetchFavoriteIdProps) => {
+  const user = await getAuthUser()
+  const favorite = await db.favorite.findFirst({
+    where: {
+      propertyId,
+      profileId: user.id,
+    },
+    select: {
+      id: true,
+    },
+  })
+  console.log(f, 'favorite →', favorite)
+  return favorite?.id || null
+}
+export const toggleFavoriteAction = async ({}) => {
+  return { message: 'Toggle Favorite' }
 }
