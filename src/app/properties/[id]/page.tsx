@@ -8,6 +8,7 @@ import ShareButton from '@/components/properties/ShareButton'
 import UserInfo from '@/components/properties/UserInfo'
 import { fetchPropertyDetails } from '@/utils/actions'
 import { paths } from '@/utils/paths'
+import { Separator } from '@/components/ui/separator'
 import { redirect } from 'next/navigation'
 import React, { type FC } from 'react'
 
@@ -62,6 +63,7 @@ const PropertyDetailPage: FC<PropertyDetailPageProps> = async ({ params }) => {
           </div>
           <PropertyDetails details={details} />
           <UserInfo profile={{ firstName, profileImage }} />
+          <Separator className='mt-4' />
         </div>
         <div className='flex flex-col items-center lg:col-span-4'>
           {/* calendar */}
