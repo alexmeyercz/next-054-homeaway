@@ -1,4 +1,7 @@
+import FavoriteToggleButton from '@/components/card/FavoriteToggleButton'
+import BreadCrumbs from '@/components/properties/BreadCrumbs'
 import { fetchPropertyDetails } from '@/utils/actions'
+import { paths } from '@/utils/paths'
 import { redirect } from 'next/navigation'
 import React, { type FC } from 'react'
 
@@ -13,7 +16,7 @@ type PropertyDetailPageProps = {
 const PropertyDetailPage: FC<PropertyDetailPageProps> = async ({ params }) => {
   const property = await fetchPropertyDetails(params.id)
   if (!property) {
-    return redirect('/')
+    return redirect(paths.home())
   }
   const { baths, bedrooms, beds, guests } = property
   const details = {
@@ -23,9 +26,16 @@ const PropertyDetailPage: FC<PropertyDetailPageProps> = async ({ params }) => {
     guests,
   }
   return (
-    <div>
-      <h1>PropertyDetailPage</h1>
-    </div>
+    <section>
+      <BreadCrumbs name={property.name} />
+      <header className='mt-4 flex items-center justify-between'>
+        <h1>{property.name}</h1>
+        <div className='flex items-center gap-x-4'>
+          {/* share button */}
+          <FavoriteToggleButton propertyId={property.id} />
+        </div>
+      </header>
+    </section>
   )
 }
 export default PropertyDetailPage
