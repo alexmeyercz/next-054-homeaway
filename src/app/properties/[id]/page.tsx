@@ -11,6 +11,8 @@ import { paths } from '@/utils/paths'
 import { Separator } from '@/components/ui/separator'
 import { redirect } from 'next/navigation'
 import React, { type FC } from 'react'
+import Amenities from '@/components/properties/Amenities'
+import Description from '@/components/properties/Description'
 
 const f = '⇒ page.tsx:'
 
@@ -64,6 +66,8 @@ const PropertyDetailPage: FC<PropertyDetailPageProps> = async ({ params }) => {
           <PropertyDetails details={details} />
           <UserInfo profile={{ firstName, profileImage }} />
           <Separator className='mt-4' />
+          <Description description={property.description} />
+          <Amenities amenities={property.amenities} />
         </div>
         <div className='flex flex-col items-center lg:col-span-4'>
           {/* calendar */}
