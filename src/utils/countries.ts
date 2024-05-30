@@ -12,7 +12,5 @@ export const formattedCountries = countries.map((country) => {
   }
 })
 export const findCountryByCode = (code: string) => {
-  return formattedCountries.find((country) => {
-    return country.code === code
-  })
+  return formattedCountries.find((item) => item.code === code)
 }

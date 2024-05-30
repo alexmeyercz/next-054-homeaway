@@ -13,8 +13,18 @@ import { redirect } from 'next/navigation'
 import React, { type FC } from 'react'
 import Amenities from '@/components/properties/Amenities'
 import Description from '@/components/properties/Description'
+import { Skeleton } from '@/components/ui/skeleton'
+import dynamic from 'next/dynamic'
 
 const f = '⇒ page.tsx:'
+
+const DynamicMap = dynamic(
+  () => import('@/components/properties/PropertyMap'),
+  {
+    ssr: false,
+    loading: () => <Skeleton className='h-[400px] w-full' />,
+  },
+)
 
 type PropertyDetailPageProps = {
   params: {
@@ -36,6 +46,8 @@ const PropertyDetailPage: FC<PropertyDetailPageProps> = async ({ params }) => {
   }
   const firstName = property.profile.firstName
   const profileImage = property.profile.profileImage
+
+  console.log(f, 'property.country →', property.country)
 
   return (
     <section>
@@ -68,6 +80,7 @@ const PropertyDetailPage: FC<PropertyDetailPageProps> = async ({ params }) => {
           <Separator className='mt-4' />
           <Description description={property.description} />
           <Amenities amenities={property.amenities} />
+          {/* <DynamicMap countryCode={property.country} /> */}
         </div>
         <div className='flex flex-col items-center lg:col-span-4'>
           {/* calendar */}
