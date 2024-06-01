@@ -277,3 +277,8 @@ export const fetchPropertyDetails = (id: string) => {
     },
   })
 }
+
+/* ----------------------------------------------------------- */
+/*                           REVIEWS                           */
+/* ----------------------------------------------------------- */
+export const createReviewAction = () => {}
