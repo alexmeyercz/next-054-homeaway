@@ -1,6 +1,7 @@
 ### Next App
 
 ```sh
+
 npx create-next-app@latest home-away
 ```
 
@@ -78,7 +79,7 @@ function HomePage() {
       <Button
         variant='outline'
         size='lg'
-        className='capitalize m-8'
+        className='m-8 capitalize'
       >
         Click me
       </Button>
@@ -87,12 +88,6 @@ function HomePage() {
 }
 export default HomePage
 ```
-
-```sh
-npx shadcn-ui@latest init
-```
-
-then add components
 
 ```sh
 npx shadcn-ui@latest add breadcrumb calendar card checkbox dropdown-menu input label popover scroll-area select separator table textarea toast skeleton
@@ -126,7 +121,7 @@ globals.css
 ```css
 @layer components {
   .container {
-    @apply mx-auto max-w-6xl xl:max-w-7xl px-8;
+    @apply mx-auto max-w-6xl px-8 xl:max-w-7xl;
   }
 }
 ```
@@ -140,10 +135,10 @@ import DarkMode from './DarkMode'
 function Navbar() {
   return (
     <nav className='border-b'>
-      <div className='container flex flex-col sm:flex-row  sm:justify-between sm:items-center flex-wrap gap-4 py-8'>
+      <div className='container flex flex-col flex-wrap  gap-4 py-8 sm:flex-row sm:items-center sm:justify-between'>
         <Logo />
         <NavSearch />
-        <div className='flex gap-4 items-center '>
+        <div className='flex items-center gap-4 '>
           <DarkMode />
           <LinksDropdown />
         </div>
@@ -190,11 +185,13 @@ function Logo() {
       asChild
     >
       <Link href='/'>
-        <LuTent className='w-6 h-6' />
+        <LuTent className='h-6 w-6' />
       </Link>
     </Button>
   )
 }
+
+export default Logo
 ```
 
 ### NavSearch
@@ -207,7 +204,7 @@ function NavSearch() {
     <Input
       type='search'
       placeholder='find a property...'
-      className='max-w-xs dark:bg-muted '
+      className='dark:bg-muted max-w-xs '
     />
   )
 }
@@ -353,7 +350,7 @@ export default function ModeToggle() {
 import { LuUser2 } from 'react-icons/lu'
 
 function UserIcon() {
-  return <LuUser2 className='w-6 h-6 bg-primary rounded-full text-white' />
+  return <LuUser2 className='bg-primary h-6 w-6 rounded-full text-white' />
 }
 export default UserIcon
 ```
@@ -402,9 +399,9 @@ function LinksDropdown() {
       <DropdownMenuTrigger asChild>
         <Button
           variant='outline'
-          className='flex gap-4 max-w-[100px]'
+          className='flex max-w-[100px] gap-4'
         >
-          <LuAlignLeft className='w-6 h-6' />
+          <LuAlignLeft className='h-6 w-6' />
           <UserIcon />
         </Button>
       </DropdownMenuTrigger>
@@ -418,7 +415,7 @@ function LinksDropdown() {
             <DropdownMenuItem key={link.href}>
               <Link
                 href={link.href}
-                className='capitalize w-full'
+                className='w-full capitalize'
               >
                 {link.label}
               </Link>
@@ -603,7 +600,7 @@ return (
           <DropdownMenuItem key={link.href}>
             <Link
               href={link.href}
-              className='capitalize w-full'
+              className='w-full capitalize'
             >
               {link.label}
             </Link>
@@ -646,8 +643,8 @@ const createProfileAction = async (formData: FormData) => {
 function CreateProfile() {
   return (
     <section>
-      <h1 className='text-2xl font-semibold mb-8 capitalize'>new user</h1>
-      <div className='border p-8 rounded-md max-w-lg'>
+      <h1 className='mb-8 text-2xl font-semibold capitalize'>new user</h1>
+      <div className='max-w-lg rounded-md border p-8'>
         <form action={createProfileAction}>
           <div className='mb-2'>
             <Label htmlFor='firstName'>First Name</Label>
@@ -797,7 +794,7 @@ export default FormContainer
 ```ts
 export type actionFunction = (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => Promise<{ message: string }>
 ```
 
@@ -818,10 +815,10 @@ const createProfileAction = async (prevState: any, formData: FormData) => {
 function CreateProfile() {
   return (
     <section>
-      <h1 className='text-2xl font-semibold mb-8 capitalize'>new user</h1>
-      <div className='border p-8 rounded-md max-w-lg'>
+      <h1 className='mb-8 text-2xl font-semibold capitalize'>new user</h1>
+      <div className='max-w-lg rounded-md border p-8'>
         <FormContainer action={createProfileAction}>
-          <div className='grid gap-4 mt-4 '>
+          <div className='mt-4 grid gap-4 '>
             <FormInput
               type='text'
               name='firstName'
@@ -882,7 +879,7 @@ import { profileSchema } from './schemas'
 
 export const createProfileAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => {
   try {
     const rawData = Object.fromEntries(formData)
@@ -993,7 +990,7 @@ import { redirect } from 'next/navigation'
 
 export const createProfileAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => {
   try {
     const user = await currentUser()
@@ -1058,10 +1055,10 @@ async function UserIcon() {
     return (
       <img
         src={profileImage}
-        className='w-6 h-6 rounded-full object-cover'
+        className='h-6 w-6 rounded-full object-cover'
       />
     )
-  return <LuUser2 className='w-6 h-6 bg-primary rounded-full text-white' />
+  return <LuUser2 className='bg-primary h-6 w-6 rounded-full text-white' />
 }
 export default UserIcon
 ```
@@ -1111,7 +1108,7 @@ export const fetchProfile = async () => {
 ```ts
 export const updateProfileAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<{ message: string }> => {
   return { message: 'update profile action' }
 }
@@ -1130,12 +1127,12 @@ async function ProfilePage() {
 
   return (
     <section>
-      <h1 className='text-2xl font-semibold mb-8 capitalize'>user profile</h1>
-      <div className='border p-8 rounded-md'>
+      <h1 className='mb-8 text-2xl font-semibold capitalize'>user profile</h1>
+      <div className='rounded-md border p-8'>
         {/* image input container */}
 
         <FormContainer action={updateProfileAction}>
-          <div className='grid gap-4 md:grid-cols-2 mt-4 '>
+          <div className='mt-4 grid gap-4 md:grid-cols-2 '>
             <FormInput
               type='text'
               name='firstName'
@@ -1172,7 +1169,7 @@ actions.ts
 ```ts
 export const updateProfileAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<{ message: string }> => {
   const user = await getAuthUser()
   try {
@@ -1212,7 +1209,7 @@ const renderError = (error: unknown): { message: string } => {
 ```ts
 export const updateProfileAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<{ message: string }> => {
   const user = await getAuthUser()
   try {
@@ -1245,7 +1242,7 @@ schemas.ts
 ```ts
 export function validateWithZodSchema<T>(
   schema: ZodSchema<T>,
-  data: unknown
+  data: unknown,
 ): T {
   const result = schema.safeParse(data)
   if (!result.success) {
@@ -1372,7 +1369,7 @@ function ImageInputContainer(props: ImageInputContainerProps) {
   const [isUpdateFormVisible, setUpdateFormVisible] = useState(false)
 
   const userIcon = (
-    <LuUser2 className='w-24 h-24 bg-primary rounded-md text-white mb-4' />
+    <LuUser2 className='bg-primary mb-4 h-24 w-24 rounded-md text-white' />
   )
   return (
     <div>
@@ -1381,7 +1378,7 @@ function ImageInputContainer(props: ImageInputContainerProps) {
           src={image}
           width={100}
           height={100}
-          className='rounded-md object-cover mb-4 w-24 h-24'
+          className='mb-4 h-24 w-24 rounded-md object-cover'
           alt={name}
         />
       ) : (
@@ -1396,7 +1393,7 @@ function ImageInputContainer(props: ImageInputContainerProps) {
         {text}
       </Button>
       {isUpdateFormVisible && (
-        <div className='max-w-lg mt-4'>
+        <div className='mt-4 max-w-lg'>
           <FormContainer action={action}>
             {props.children}
             <ImageInput />
@@ -1417,7 +1414,7 @@ actions.ts
 ```ts
 export const updateProfileImageAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<{ message: string }> => {
   return { message: 'Profile image updated successfully' }
 }
@@ -1435,6 +1432,7 @@ import {
 import ImageInputContainer from '@/components/form/ImageInputContainer'
 
 /* image input container */
+
 ;<ImageInputContainer
   image={profile.profileImage}
   name={profile.username}
@@ -1496,7 +1494,7 @@ A string that is the error message to be returned when the validation fails.
 ```ts
 export const updateProfileImageAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<{ message: string }> => {
   const user = await getAuthUser()
   try {
@@ -1533,7 +1531,7 @@ const bucket = 'home-away-draft'
 // Create a single supabase client for interacting with your database
 export const supabase = createClient(
   process.env.SUPABASE_URL as string,
-  process.env.SUPABASE_KEY as string
+  process.env.SUPABASE_KEY as string,
 )
 
 export const uploadImage = async (image: File) => {
@@ -1556,7 +1554,7 @@ export const uploadImage = async (image: File) => {
 ```ts
 export const updateProfileImageAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => {
   const user = await getAuthUser()
   try {
@@ -1665,7 +1663,7 @@ export const propertySchema = z.object({
     },
     {
       message: 'description must be between 10 and 1000 words.',
-    }
+    },
   ),
   country: z.string(),
   guests: z.coerce.number().int().min(0, {
@@ -1691,7 +1689,7 @@ actions.ts
 ```ts
 export const createPropertyAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<{ message: string }> => {
   const user = await getAuthUser()
   try {
@@ -1717,13 +1715,13 @@ import { SubmitButton } from '@/components/form/Buttons'
 function CreateProperty() {
   return (
     <section>
-      <h1 className='text-2xl font-semibold mb-8 capitalize'>
+      <h1 className='mb-8 text-2xl font-semibold capitalize'>
         create property
       </h1>
-      <div className='border p-8 rounded-md'>
-        <h3 className='text-lg mb-4 font-medium'>General Info</h3>
+      <div className='rounded-md border p-8'>
+        <h3 className='mb-4 text-lg font-medium'>General Info</h3>
         <FormContainer action={createPropertyAction}>
-          <div className='grid md:grid-cols-2 gap-8 mb-4'>
+          <div className='mb-4 grid gap-8 md:grid-cols-2'>
             <FormInput
               name='name'
               type='text'
@@ -1757,23 +1755,20 @@ export default CreateProperty
 - components/form/PriceInput.tsx
 
 ```ts
-import { Label } from '../ui/label'
-import { Input } from '../ui/input'
-import { Prisma } from '@prisma/client'
+import { Label } from '../ui/label';
+import { Input } from '../ui/input';
+import { Prisma } from '@prisma/client';
 
-const name = Prisma.PropertyScalarFieldEnum.price
+const name = Prisma.PropertyScalarFieldEnum.price;
 // const name = 'price';
 type FormInputNumberProps = {
-  defaultValue?: number
-}
+  defaultValue?: number;
+};
 
 function PriceInput({ defaultValue }: FormInputNumberProps) {
   return (
     <div className='mb-2'>
-      <Label
-        htmlFor='price'
-        className='capitalize'
-      >
+      <Label htmlFor='price' className='capitalize'>
         Price ($)
       </Label>
       <Input
@@ -1785,9 +1780,9 @@ function PriceInput({ defaultValue }: FormInputNumberProps) {
         required
       />
     </div>
-  )
+  );
 }
-export default PriceInput
+export default PriceInput;
 ```
 
 ```tsx
@@ -2052,7 +2047,7 @@ export default CountriesInput
 ```
 
 ```tsx
-<div className='grid sm:grid-cols-2 gap-8 mt-4'>
+<div className='mt-4 grid gap-8 sm:grid-cols-2'>
   <CountriesInput />
   <ImageInput />
 </div>
@@ -2096,8 +2091,8 @@ function CounterInput({
         name={detail}
         value={count}
       />
-      <CardHeader className='flex flex-col gapy-5'>
-        <div className='flex items-center justify-between flex-wrap'>
+      <CardHeader className='gapy-5 flex flex-col'>
+        <div className='flex flex-wrap items-center justify-between'>
           <div className='flex flex-col'>
             <h2 className='font-medium capitalize'>{detail}</h2>
             <p className='text-muted-foreground text-sm'>
@@ -2111,16 +2106,16 @@ function CounterInput({
               type='button'
               onClick={decreaseCount}
             >
-              <LuMinus className='w-5 h-5 text-primary' />
+              <LuMinus className='text-primary h-5 w-5' />
             </Button>
-            <span className='text-xl font-bold w-5 text-center'>{count}</span>
+            <span className='w-5 text-center text-xl font-bold'>{count}</span>
             <Button
               variant='outline'
               size='icon'
               type='button'
               onClick={increaseCount}
             >
-              <LuPlus className='w-5 h-5 text-primary' />
+              <LuPlus className='text-primary h-5 w-5' />
             </Button>
           </div>
         </div>
@@ -2135,7 +2130,7 @@ export default CounterInput
 ```tsx
 return (
   <>
-    <h3 className='text-lg mt-8 mb-4 font-medium'>Accommodation Details</h3>
+    <h3 className='mb-4 mt-8 text-lg font-medium'>Accommodation Details</h3>
     <CounterInput detail='guests' />
     <CounterInput detail='bedrooms' />
     <CounterInput detail='beds' />
@@ -2251,7 +2246,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 
 function AmenitiesInput({ defaultValue }: { defaultValue?: Amenity[] }) {
   const [selectedAmenities, setSelectedAmenities] = useState<Amenity[]>(
-    defaultValue || amenities
+    defaultValue || amenities,
   )
 
   const handleChange = (amenity: Amenity) => {
@@ -2285,10 +2280,10 @@ function AmenitiesInput({ defaultValue }: { defaultValue?: Amenity[] }) {
             />
             <label
               htmlFor={amenity.name}
-              className='text-sm font-medium leading-none capitalize flex gap-x-2 items-center'
+              className='flex items-center gap-x-2 text-sm font-medium capitalize leading-none'
             >
               {amenity.name}
-              <amenity.icon className='w-4 h-4' />
+              <amenity.icon className='h-4 w-4' />
             </label>
           </div>
         ))}
@@ -2302,7 +2297,7 @@ export default AmenitiesInput
 ```tsx
 return (
   <>
-    <h3 className='text-lg mt-10 mb-6 font-medium'>Amenities</h3>
+    <h3 className='mb-6 mt-10 text-lg font-medium'>Amenities</h3>
     <AmenitiesInput />
   </>
 )
@@ -2313,7 +2308,7 @@ return (
 ```tsx
 export const createPropertyAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<{ message: string }> => {
   const user = await getAuthUser()
   try {
@@ -2463,12 +2458,12 @@ function CategoriesList({
                 href={`/?category=${item.label}${searchTerm}`}
               >
                 <article
-                  className={`p-3 flex flex-col items-center cursor-pointer duration-300  hover:text-primary w-[100px] ${
+                  className={`hover:text-primary flex w-[100px] cursor-pointer flex-col items-center  p-3 duration-300 ${
                     isActive ? 'text-primary' : ''
                   }`}
                 >
-                  <item.icon className='w-8 h-8 ' />
-                  <p className='capitalize text-sm mt-1'>{item.label}</p>
+                  <item.icon className='h-8 w-8 ' />
+                  <p className='mt-1 text-sm capitalize'>{item.label}</p>
                 </article>
               </Link>
             )
@@ -2567,7 +2562,7 @@ import type { PropertyCardProps } from '@/utils/types'
 
 function PropertiesList({ properties }: { properties: PropertyCardProps[] }) {
   return (
-    <section className='mt-4 gap-8 grid sm:grid-cols-2  lg:grid-cols-3  xl:grid-cols-4'>
+    <section className='mt-4 grid gap-8 sm:grid-cols-2  lg:grid-cols-3  xl:grid-cols-4'>
       {properties.map((property) => {
         return (
           <PropertyCard
@@ -2616,33 +2611,33 @@ function PropertyCard({ property }: { property: PropertyCardProps }) {
   return (
     <article className='group relative'>
       <Link href={`/properties/${propertyId}`}>
-        <div className='relative h-[300px] mb-2 overflow-hidden rounded-md'>
+        <div className='relative mb-2 h-[300px] overflow-hidden rounded-md'>
           <Image
             src={image}
             fill
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw'
             alt={name}
-            className='rounded-md object-cover transform group-hover:scale-110 transition-transform duration-500'
+            className='transform rounded-md object-cover transition-transform duration-500 group-hover:scale-110'
           />
         </div>
-        <div className='flex justify-between items-center'>
-          <h3 className='text-sm font-semibold mt-1'>
+        <div className='flex items-center justify-between'>
+          <h3 className='mt-1 text-sm font-semibold'>
             {name.substring(0, 30)}
           </h3>
           {/* property rating */}
         </div>
-        <p className='text-sm mt-1 text-muted-foreground '>
+        <p className='text-muted-foreground mt-1 text-sm '>
           {tagline.substring(0, 40)}
         </p>
-        <div className='flex justify-between items-center mt-1'>
-          <p className='text-sm mt-1 '>
+        <div className='mt-1 flex items-center justify-between'>
+          <p className='mt-1 text-sm '>
             <span className='font-semibold'>{formatCurrency(price)} </span>
             night
           </p>
           {/* country and flag */}
         </div>
       </Link>
-      <div className='absolute top-5 right-5 z-5'>
+      <div className='z-5 absolute right-5 top-5'>
         {/* favorite toggle button */}
       </div>
     </article>
@@ -2672,7 +2667,7 @@ async function PropertyRating({
   const countValue = `(${count}) ${inPage ? countText : ''}`
   return (
     <span className={className}>
-      <FaStar className='w-3 h-3' />
+      <FaStar className='h-3 w-3' />
       {rating} {countValue}
     </span>
   )
@@ -2698,7 +2693,7 @@ function FavoriteToggleButton({ propertyId }: { propertyId: string }) {
     <Button
       size='icon'
       variant='outline'
-      className='p-2 cursor-pointer'
+      className='cursor-pointer p-2'
     >
       <FaHeart />
     </Button>
@@ -2708,7 +2703,7 @@ export default FavoriteToggleButton
 ```
 
 ```tsx
-<div className='absolute top-5 right-5 z-5'>
+<div className='z-5 absolute right-5 top-5'>
   <FavoriteToggleButton propertyId={propertyId} />
 </div>
 ```
@@ -2725,7 +2720,7 @@ function CountryFlagAndName({ countryCode }: { countryCode: string }) {
       ? `${validCountry!.name.substring(0, 20)}...`
       : validCountry!.name
   return (
-    <span className='flex justify-between items-center gap-2 text-sm '>
+    <span className='flex items-center justify-between gap-2 text-sm '>
       {validCountry?.flag} {countryName}
     </span>
   )
@@ -2748,7 +2743,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 function LoadingCards() {
   return (
-    <section className='mt-4 gap-8 grid sm:grid-cols-2  lg:grid-cols-3  xl:grid-cols-4'>
+    <section className='mt-4 grid gap-8 sm:grid-cols-2  lg:grid-cols-3  xl:grid-cols-4'>
       <SkeletonCard />
       <SkeletonCard />
       <SkeletonCard />
@@ -2762,8 +2757,8 @@ export function SkeletonCard() {
   return (
     <div>
       <Skeleton className='h-[300px] rounded-md' />
-      <Skeleton className='h-4 mt-2 w-3/4' />
-      <Skeleton className='h-4 mt-2 w-1/2' />
+      <Skeleton className='mt-2 h-4 w-3/4' />
+      <Skeleton className='mt-2 h-4 w-1/2' />
     </div>
   )
 }
@@ -2823,7 +2818,7 @@ function NavSearch() {
   const pathname = usePathname()
   const { replace } = useRouter()
   const [search, setSearch] = useState(
-    searchParams.get('search')?.toString() || ''
+    searchParams.get('search')?.toString() || '',
   )
   const handleSearch = useDebouncedCallback((value: string) => {
     const params = new URLSearchParams(searchParams)
@@ -2843,7 +2838,7 @@ function NavSearch() {
     <Input
       type='search'
       placeholder='find a property...'
-      className='max-w-xs dark:bg-muted '
+      className='dark:bg-muted max-w-xs '
       onChange={(e) => {
         setSearch(e.target.value)
         handleSearch(e.target.value)
@@ -2900,7 +2895,7 @@ export const CardSignInButton = () => {
         type='button'
         size='icon'
         variant='outline'
-        className='p-2 cursor-pointer'
+        className='cursor-pointer p-2'
         asChild
       >
         <FaRegHeart />
@@ -2924,7 +2919,7 @@ function FavoriteToggleButton({ propertyId }: { propertyId: string }) {
     <Button
       size='icon'
       variant='outline'
-      className='p-2 cursor-pointer'
+      className='cursor-pointer p-2'
     >
       <FaHeart />
     </Button>
@@ -2994,7 +2989,7 @@ export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
       type='submit'
       size='icon'
       variant='outline'
-      className=' p-2 cursor-pointer'
+      className=' cursor-pointer p-2'
     >
       {pending ? (
         <ReloadIcon className=' animate-spin' />
@@ -3156,14 +3151,14 @@ export const fetchPropertyDetails = (id: string) => {
 - properties/[id]/loading.tsx
 
 ```ts
-'use client'
+'use client';
 
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from '@/components/ui/skeleton';
 function loading() {
-  return <Skeleton className='h-[300px] md:h-[500px] w-full rounded' />
+  return <Skeleton className='h-[300px] md:h-[500px] w-full rounded' />;
 }
 
-export default loading
+export default loading;
 ```
 
 - properties/[id]/page.tsx
@@ -3220,7 +3215,7 @@ export default BreadCrumbs
 return (
   <section>
     <BreadCrumbs name={property.name} />
-    <header className='flex justify-between items-center mt-4'>
+    <header className='mt-4 flex items-center justify-between'>
       <h1 className='text-4xl font-bold '>{property.tagline}</h1>
       <div className='flex items-center gap-x-4'>
         {/* share button */}
@@ -3285,7 +3280,7 @@ function ShareButton({
         side='top'
         align='end'
         sideOffset={10}
-        className='flex items-center gap-x-2 justify-center w-full'
+        className='flex w-full items-center justify-center gap-x-2'
       >
         <TwitterShareButton
           url={shareLink}
@@ -3350,13 +3345,13 @@ function ImageContainer({
   name: string
 }) {
   return (
-    <section className='h-[300px] md:h-[500px] relative mt-8'>
+    <section className='relative mt-8 h-[300px] md:h-[500px]'>
       <Image
         src={mainImage}
         fill
         sizes='100vw'
         alt={name}
-        className='object-cover  rounded-md'
+        className='rounded-md  object-cover'
         priority
       />
     </section>
@@ -3380,9 +3375,9 @@ export default ImageContainer
 
 ```tsx
 return (
-  <section className='lg:grid lg:grid-cols-12 gap-x-12 mt-12'>
+  <section className='mt-12 gap-x-12 lg:grid lg:grid-cols-12'>
     <div className='lg:col-span-8'>
-      <div className='flex gap-x-4 items-center'>
+      <div className='flex items-center gap-x-4'>
         <h1 className='text-xl font-bold'>{property.name}</h1>
         <PropertyRating
           inPage
@@ -3390,7 +3385,7 @@ return (
         />
       </div>
     </div>
-    <div className='lg:col-span-4 flex flex-col items-center'>
+    <div className='flex flex-col items-center lg:col-span-4'>
       {/* calendar */}
     </div>
   </section>
@@ -3430,7 +3425,7 @@ export default function App() {
 - properties/[id]/page.tsx
 
 ```tsx
-<div className='lg:col-span-4 flex flex-col items-center'>
+<div className='flex flex-col items-center lg:col-span-4'>
   {/* calendar */}
   <BookingCalendar />
 </div>
@@ -3497,13 +3492,13 @@ type UserInfoProps = {
 
 function UserInfo({ profile: { profileImage, firstName } }: UserInfoProps) {
   return (
-    <article className='grid grid-cols-[auto,1fr] gap-4 mt-4'>
+    <article className='mt-4 grid grid-cols-[auto,1fr] gap-4'>
       <Image
         src={profileImage}
         alt={firstName}
         width={50}
         height={50}
-        className='rounded-md w-12 h-12 object-cover'
+        className='h-12 w-12 rounded-md object-cover'
       />
       <div>
         <p>
@@ -3535,7 +3530,7 @@ const profileImage = property.profile.profileImage
 
 ```tsx
 function Title({ text }: { text: string }) {
-  return <h3 className='text-lg font-bold  mb-2'>{text}</h3>
+  return <h3 className='mb-2 text-lg  font-bold'>{text}</h3>
 }
 export default Title
 ```
@@ -3609,7 +3604,7 @@ function Amenities({ amenities }: { amenities: string }) {
   return (
     <div className='mt-4'>
       <Title text='What this place offers' />
-      <div className='grid md:grid-cols-2 gap-x-4'>
+      <div className='grid gap-x-4 md:grid-cols-2'>
         {amenitiesList.map((amenity) => {
           if (!amenity.selected) {
             return null
@@ -3617,10 +3612,10 @@ function Amenities({ amenities }: { amenities: string }) {
           return (
             <div
               key={amenity.name}
-              className='flex items-center gap-x-4 mb-2 '
+              className='mb-2 flex items-center gap-x-4 '
             >
-              <LuFolderCheck className='h-6 w-6 text-primary' />
-              <span className='font-light text-sm capitalize'>
+              <LuFolderCheck className='text-primary h-6 w-6' />
+              <span className='text-sm font-light capitalize'>
                 {amenity.name}
               </span>
             </div>
@@ -3683,7 +3678,7 @@ function PropertyMap({ countryCode }: { countryCode: string }) {
       <MapContainer
         scrollWheelZoom={false}
         zoomControl={false}
-        className='h-[50vh] rounded-lg relative z-0'
+        className='relative z-0 h-[50vh] rounded-lg'
         center={location || defaultLocation}
         zoom={7}
       >
@@ -3711,7 +3706,7 @@ const DynamicMap = dynamic(
   {
     ssr: false,
     loading: () => <Skeleton className='h-[400px] w-full' />,
-  }
+  },
 )
 return <DynamicMap countryCode={property.country} />
 ```
@@ -3732,3 +3727,2372 @@ Server Side Rendering (SSR) Control: By default, Next.js pre-renders every page.
 ```
 
 - refactor NavSearch Component
+
+### Review Model
+
+```prisma
+
+model Review {
+  id        String   @id @default(uuid())
+  profile   Profile  @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
+  profileId String
+  property   Property  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId String
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Property {
+ reviews Review[]
+}
+model Profile {
+ reviews Review[]
+}
+```
+
+DON'T FORGET !!!!
+
+```sh
+npx prisma db push
+```
+
+- restart server
+
+### Reviews Setup
+
+- create components/reviews
+
+  - Comment.tsx
+  - PropertyReviews.tsx
+  - Rating.tsx
+  - SubmitReview.tsx
+  - ReviewCard.tsx
+
+- create placeholder functions in actions.ts
+
+```ts
+export const createReviewAction = async () => {
+  return { message: 'create review' }
+}
+
+export const fetchPropertyReviews = async () => {
+  return { message: 'fetch reviews' }
+}
+
+export const fetchPropertyReviewsByUser = async () => {
+  return { message: 'fetch user reviews' }
+}
+
+export const deleteReviewAction = async () => {
+  return { message: 'delete  reviews' }
+}
+```
+
+### RatingInput
+
+- components/form/RatingInput.tsx
+
+```tsx
+import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+
+const RatingInput = ({
+  name,
+  labelText,
+}: {
+  name: string
+  labelText?: string
+}) => {
+  const numbers = Array.from({ length: 5 }, (_, i) => {
+    const value = i + 1
+    return value.toString()
+  }).reverse()
+
+  return (
+    <div className='mb-2 max-w-xs'>
+      <Label
+        htmlFor={name}
+        className='capitalize'
+      >
+        {labelText || name}
+      </Label>
+      <Select
+        defaultValue={numbers[0]}
+        name={name}
+        required
+      >
+        <SelectTrigger>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {numbers.map((number) => {
+            return (
+              <SelectItem
+                key={number}
+                value={number}
+              >
+                {number}
+              </SelectItem>
+            )
+          })}
+        </SelectContent>
+      </Select>
+    </div>
+  )
+}
+
+export default RatingInput
+```
+
+### SubmitReview Component
+
+- app/properties/[id]
+
+```tsx
+return (
+  <section>
+    <section></section>
+    {/* after two column section */}
+    <SubmitReview propertyId={property.id} />;
+  </section>
+)
+```
+
+- components/reviews/SubmitReview.tsx
+
+```tsx
+'use client'
+import { useState } from 'react'
+import { SubmitButton } from '@/components/form/Buttons'
+import FormContainer from '@/components/form/FormContainer'
+import { Card } from '@/components/ui/card'
+import RatingInput from '@/components/form/RatingInput'
+import TextAreaInput from '@/components/form/TextAreaInput'
+import { Button } from '@/components/ui/button'
+import { createReviewAction } from '@/utils/actions'
+function SubmitReview({ propertyId }: { propertyId: string }) {
+  const [isReviewFormVisible, setIsReviewFormVisible] = useState(false)
+  return (
+    <div className='mt-8'>
+      <Button onClick={() => setIsReviewFormVisible((prev) => !prev)}>
+        Leave a Review
+      </Button>
+      {isReviewFormVisible && (
+        <Card className='mt-8 p-8'>
+          <FormContainer action={createReviewAction}>
+            <input
+              type='hidden'
+              name='propertyId'
+              value={propertyId}
+            />
+            <RatingInput name='rating' />
+            <TextAreaInput
+              name='comment'
+              labelText='your thoughts on this property'
+              defaultValue='Amazing place !!!'
+            />
+            <SubmitButton
+              text='Submit'
+              className='mt-4'
+            />
+          </FormContainer>
+        </Card>
+      )}
+    </div>
+  )
+}
+
+export default SubmitReview
+```
+
+- optional : set rows prop in TextArea.tsx
+
+### Submit Review
+
+- utils/schemas.ts
+
+```ts
+export const createReviewSchema = z.object({
+  propertyId: z.string(),
+  rating: z.coerce.number().int().min(1).max(5),
+  comment: z.string().min(10).max(1000),
+})
+```
+
+- action.ts
+
+```ts
+export async function createReviewAction(prevState: any, formData: FormData) {
+  const user = await getAuthUser()
+  try {
+    const rawData = Object.fromEntries(formData)
+
+    const validatedFields = validateWithZodSchema(createReviewSchema, rawData)
+    await db.review.create({
+      data: {
+        ...validatedFields,
+        profileId: user.id,
+      },
+    })
+    revalidatePath(`/properties/${validatedFields.propertyId}`)
+    return { message: 'Review submitted successfully' }
+  } catch (error) {
+    return renderError(error)
+  }
+}
+```
+
+### Fetch Property Reviews
+
+- actions.ts
+
+```ts
+export async function fetchPropertyReviews(propertyId: string) {
+  const reviews = await db.review.findMany({
+    where: {
+      propertyId,
+    },
+    select: {
+      id: true,
+      rating: true,
+      comment: true,
+      profile: {
+        select: {
+          firstName: true,
+          profileImage: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
+  return reviews
+}
+```
+
+### Render Reviews
+
+- app/properties/[id]
+
+```tsx
+return (
+  <>
+    {/* after two column section */}
+    <SubmitReview propertyId={property.id} />
+    <PropertyReviews propertyId={property.id} />
+  </>
+)
+```
+
+- components/reviews/PropertyReviews.tsx
+
+```tsx
+import { fetchPropertyReviews } from '@/utils/actions'
+import Title from '@/components/properties/Title'
+
+import ReviewCard from './ReviewCard'
+async function PropertyReviews({ propertyId }: { propertyId: string }) {
+  const reviews = await fetchPropertyReviews(propertyId)
+  if (reviews.length < 1) return null
+  return (
+    <div className='mt-8'>
+      <Title text='Reviews' />
+      <div className='mt-4 grid gap-8 md:grid-cols-2 '>
+        {reviews.map((review) => {
+          const { comment, rating } = review
+          const { firstName, profileImage } = review.profile
+          const reviewInfo = {
+            comment,
+            rating,
+            name: firstName,
+            image: profileImage,
+          }
+          return (
+            <ReviewCard
+              key={review.id}
+              reviewInfo={reviewInfo}
+            />
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+export default PropertyReviews
+```
+
+### ReviewCard Component
+
+```tsx
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import Rating from './Rating'
+import Comment from './Comment'
+type ReviewCardProps = {
+  reviewInfo: {
+    comment: string
+    rating: number
+    name: string
+    image: string
+  }
+  children?: React.ReactNode
+}
+
+function ReviewCard({ reviewInfo, children }: ReviewCardProps) {
+  return (
+    <Card className='relative'>
+      <CardHeader>
+        <div className='flex items-center'>
+          <img
+            src={reviewInfo.image}
+            alt='profile'
+            className='h-12 w-12 rounded-full object-cover'
+          />
+          <div className='ml-4'>
+            <h3 className='mb-1 text-sm font-bold capitalize'>
+              {reviewInfo.name}
+            </h3>
+            <Rating rating={reviewInfo.rating} />
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <Comment comment={reviewInfo.comment} />
+      </CardContent>
+      {/* delete button later */}
+      <div className='absolute right-3 top-3'>{children}</div>
+    </Card>
+  )
+}
+export default ReviewCard
+```
+
+### Rating
+
+```tsx
+import { FaStar, FaRegStar } from 'react-icons/fa'
+
+function Rating({ rating }: { rating: number }) {
+  // rating = 2
+  // 1 <= 2 true
+  // 2 <= 2 true
+  // 3 <= 2 false
+  // ....
+  const stars = Array.from({ length: 5 }, (_, i) => i + 1 <= rating)
+
+  return (
+    <div className='flex items-center gap-x-1'>
+      {stars.map((isFilled, i) => {
+        const className = `w-3 h-3 ${
+          isFilled ? 'text-primary' : 'text-gray-400'
+        }`
+        return isFilled ? (
+          <FaStar
+            className={className}
+            key={i}
+          />
+        ) : (
+          <FaRegStar
+            className={className}
+            key={i}
+          />
+        )
+      })}
+    </div>
+  )
+}
+
+export default Rating
+```
+
+### Comment
+
+```tsx
+'use client'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+function Comment({ comment }: { comment: string }) {
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded)
+  }
+  const longComment = comment.length > 130
+  const displayComment =
+    longComment && !isExpanded ? `${comment.slice(0, 130)}...` : comment
+
+  return (
+    <div>
+      <p className='text-sm'>{displayComment}</p>
+      {longComment && (
+        <Button
+          variant='link'
+          className='text-muted-foreground pl-0'
+          onClick={toggleExpanded}
+        >
+          {isExpanded ? 'Show Less' : 'Show More'}
+        </Button>
+      )}
+    </div>
+  )
+}
+
+export default Comment
+```
+
+### Fetch User's Reviews and Delete Review
+
+```ts
+export const fetchPropertyReviewsByUser = async () => {
+  const user = await getAuthUser()
+  const reviews = await db.review.findMany({
+    where: {
+      profileId: user.id,
+    },
+    select: {
+      id: true,
+      rating: true,
+      comment: true,
+      property: {
+        select: {
+          name: true,
+          image: true,
+        },
+      },
+    },
+  })
+  return reviews
+}
+
+export const deleteReviewAction = async (prevState: { reviewId: string }) => {
+  const { reviewId } = prevState
+  const user = await getAuthUser()
+
+  try {
+    await db.review.delete({
+      where: {
+        id: reviewId,
+        profileId: user.id,
+      },
+    })
+
+    revalidatePath('/reviews')
+    return { message: 'Review deleted successfully' }
+  } catch (error) {
+    return renderError(error)
+  }
+}
+```
+
+### Icon Button
+
+- components/form/Buttons.tsx
+
+```tsx
+import { LuTrash2, LuPenSquare } from 'react-icons/lu'
+
+type actionType = 'edit' | 'delete'
+export const IconButton = ({ actionType }: { actionType: actionType }) => {
+  const { pending } = useFormStatus()
+
+  const renderIcon = () => {
+    switch (actionType) {
+      case 'edit':
+        return <LuPenSquare />
+      case 'delete':
+        return <LuTrash2 />
+      default:
+        const never: never = actionType
+        throw new Error(`Invalid action type: ${never}`)
+    }
+  }
+
+  return (
+    <Button
+      type='submit'
+      size='icon'
+      variant='link'
+      className='cursor-pointer p-2'
+    >
+      {pending ? <ReloadIcon className=' animate-spin' /> : renderIcon()}
+    </Button>
+  )
+}
+```
+
+### Reviews Page
+
+- app/reviews/page.tsx
+
+```tsx
+import EmptyList from '@/components/home/EmptyList'
+import { deleteReviewAction, fetchPropertyReviewsByUser } from '@/utils/actions'
+import ReviewCard from '@/components/reviews/ReviewCard'
+import Title from '@/components/properties/Title'
+import FormContainer from '@/components/form/FormContainer'
+import { IconButton } from '@/components/form/Buttons'
+async function ReviewsPage() {
+  const reviews = await fetchPropertyReviewsByUser()
+  if (reviews.length === 0) return <EmptyList />
+
+  return (
+    <>
+      <Title text='Your Reviews' />
+      <section className='mt-4 grid gap-8 md:grid-cols-2 '>
+        {reviews.map((review) => {
+          const { comment, rating } = review
+          const { name, image } = review.property
+          const reviewInfo = {
+            comment,
+            rating,
+            name,
+            image,
+          }
+          return (
+            <ReviewCard
+              key={review.id}
+              reviewInfo={reviewInfo}
+            >
+              <DeleteReview reviewId={review.id} />
+            </ReviewCard>
+          )
+        })}
+      </section>
+    </>
+  )
+}
+
+const DeleteReview = ({ reviewId }: { reviewId: string }) => {
+  const deleteReview = deleteReviewAction.bind(null, { reviewId })
+  return (
+    <FormContainer action={deleteReview}>
+      <IconButton actionType='delete' />
+    </FormContainer>
+  )
+}
+
+export default ReviewsPage
+```
+
+- loading.tsx
+
+```tsx
+'use client'
+
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Skeleton } from '@/components/ui/skeleton'
+function loading() {
+  return (
+    <section className='mt-4 grid gap-8 md:grid-cols-2 '>
+      <ReviewLoadingCard />
+      <ReviewLoadingCard />
+    </section>
+  )
+}
+
+const ReviewLoadingCard = () => {
+  return (
+    <Card>
+      <CardHeader>
+        <div className='flex items-center'>
+          <Skeleton className='h-12 w-12 rounded-full' />
+          <div className='ml-4'>
+            <Skeleton className='mb-2 h-4 w-[150px]' />
+            <Skeleton className='h-4 w-[100px]' />
+          </div>
+        </div>
+      </CardHeader>
+    </Card>
+  )
+}
+
+export default loading
+```
+
+### Allow Review
+
+- actions.ts
+
+```ts
+export const findExistingReview = async (
+  userId: string,
+  propertyId: string,
+) => {
+  return db.review.findFirst({
+    where: {
+      profileId: userId,
+      propertyId: propertyId,
+    },
+  })
+}
+```
+
+- app/properties/[id]
+
+```tsx
+import { findExistingReview } from '@/utils/actions'
+import { auth } from '@clerk/nextjs/server'
+
+async function PropertyDetailsPage({ params }: { params: { id: string } }) {
+  const { userId } = auth()
+  const isNotOwner = property.profile.clerkId !== userId
+  const reviewDoesNotExist =
+    userId && isNotOwner && !(await findExistingReview(userId, property.id))
+
+  return <>{reviewDoesNotExist && <SubmitReview propertyId={property.id} />}</>
+}
+```
+
+Prisma's findUnique and findFirst methods are used to retrieve a single record from the database, but they have some differences in their behavior:
+
+- findUnique: This method is used when you want to retrieve a single record that matches a unique constraint or a primary key. If no record is found, it returns null.
+
+- findFirst: This method is used when you want to retrieve a single record that matches a non-unique constraint. It can also be used with ordering and filtering. If no record is found, it returns null.
+
+In summary, use findUnique when you're sure the field you're querying by is unique, and use findFirst when you're querying by a non-unique field or need more complex queries with ordering and filtering.
+
+```ts
+const user = await prisma.user.findUnique({
+  where: {
+    email: 'alice@prisma.io',
+  },
+})
+
+const user = await prisma.user.findFirst({
+  where: {
+    email: {
+      contains: 'prisma.io',
+    },
+  },
+  orderBy: {
+    name: 'asc',
+  },
+})
+```
+
+### PropertyRating - Complete
+
+- actions
+
+```ts
+export async function fetchPropertyRating(propertyId: string) {
+  const result = await db.review.groupBy({
+    by: ['propertyId'],
+    _avg: {
+      rating: true,
+    },
+    _count: {
+      rating: true,
+    },
+    where: {
+      propertyId,
+    },
+  })
+
+  // empty array if no reviews
+  return {
+    rating: result[0]?._avg.rating?.toFixed(1) ?? 0,
+    count: result[0]?._count.rating ?? 0,
+  }
+}
+```
+
+- components/card/PropertyRating.tsx
+
+```tsx
+import { fetchPropertyRating } from '@/utils/actions'
+import { FaStar } from 'react-icons/fa'
+
+async function PropertyRating({
+  propertyId,
+  inPage,
+}: {
+  propertyId: string
+  inPage: boolean
+}) {
+  const { rating, count } = await fetchPropertyRating(propertyId)
+  if (count === 0) return null
+  const className = `flex gap-1 items-center ${inPage ? 'text-md' : 'text-xs'}`
+  const countText = count === 1 ? 'review' : 'reviews'
+  const countValue = `(${count}) ${inPage ? countText : ''}`
+  return (
+    <span className={className}>
+      <FaStar className='h-3 w-3' />
+      {rating} {countValue}
+    </span>
+  )
+}
+
+export default PropertyRating
+```
+
+### Booking Model
+
+- schema.prisma
+
+```prisma
+model Booking {
+  id        String   @id @default(uuid())
+  profile   Profile  @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
+  profileId String
+  property   Property  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId String
+  orderTotal     Int
+  totalNights    Int
+  checkIn   DateTime
+  checkOut  DateTime
+  paymentStatus Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Profile {
+  bookings Booking[]
+}
+model Property {
+  bookings Booking[]
+}
+
+```
+
+```bash
+npx prisma db push
+```
+
+- restart server !!!
+
+### Fetch Bookings
+
+- actions.ts
+
+```ts
+export const fetchPropertyDetails = (id: string) => {
+  return db.property.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      profile: true,
+      bookings: {
+        select: {
+          checkIn: true,
+          checkOut: true,
+        },
+      },
+    },
+  })
+}
+```
+
+### Booking Types
+
+- utils/types.ts
+
+```ts
+export type DateRangeSelect = {
+  startDate: Date
+  endDate: Date
+  key: string
+}
+
+export type Booking = {
+  checkIn: Date
+  checkOut: Date
+}
+```
+
+### Booking Components
+
+- remove @/components/properties/BookingCalendar.tsx
+
+- create @/components/booking
+  - BookingCalendar.tsx
+  - BookingContainer.tsx
+  - BookingForm.tsx
+  - BookingWrapper.tsx
+  - ConfirmBooking.tsx
+
+### Zustand
+
+[Docs](https://docs.pmnd.rs/zustand/getting-started/introduction)
+
+```sh
+npm install zustand
+```
+
+### Setup Store
+
+- utils/store.ts
+
+```ts
+import { create } from 'zustand'
+import { Booking } from './types'
+import { DateRange } from 'react-day-picker'
+// Define the state's shape
+type PropertyState = {
+  propertyId: string
+  price: number
+  bookings: Booking[]
+  range: DateRange | undefined
+}
+
+// Create the store
+export const useProperty = create<PropertyState>(() => {
+  return {
+    propertyId: '',
+    price: 0,
+    bookings: [],
+    range: undefined,
+  }
+})
+```
+
+### BookingWrapper
+
+```tsx
+'use client'
+
+import { useProperty } from '@/utils/store'
+import { Booking } from '@/utils/types'
+import BookingCalendar from './BookingCalendar'
+import BookingContainer from './BookingContainer'
+import { useEffect } from 'react'
+
+type BookingWrapperProps = {
+  propertyId: string
+  price: number
+  bookings: Booking[]
+}
+export default function BookingWrapper({
+  propertyId,
+  price,
+  bookings,
+}: BookingWrapperProps) {
+  useEffect(() => {
+    useProperty.setState({
+      propertyId,
+      price,
+      bookings,
+    })
+  }, [])
+  return (
+    <>
+      <BookingCalendar />
+      <BookingContainer />
+    </>
+  )
+}
+```
+
+- properties/[id]/page.tsx
+
+```tsx
+const DynamicBookingWrapper = dynamic(
+  () => import('@/components/booking/BookingWrapper'),
+  {
+    ssr: false,
+    loading: () => <Skeleton className='h-[200px] w-full' />,
+  },
+)
+
+return (
+  <div className='flex flex-col items-center lg:col-span-4'>
+    {/* calendar */}
+    <DynamicBookingWrapper
+      propertyId={property.id}
+      price={property.price}
+      bookings={property.bookings}
+    />
+  </div>
+)
+```
+
+### Helper Functions
+
+- utils/calendar.ts
+
+```ts
+import { DateRange } from 'react-day-picker'
+import { Booking } from '@/utils/types'
+
+export const defaultSelected: DateRange = {
+  from: undefined,
+  to: undefined,
+}
+
+export const generateBlockedPeriods = ({
+  bookings,
+  today,
+}: {
+  bookings: Booking[]
+  today: Date
+}) => {
+  today.setHours(0, 0, 0, 0) // Set the time to 00:00:00.000
+
+  const disabledDays: DateRange[] = [
+    ...bookings.map((booking) => ({
+      from: booking.checkIn,
+      to: booking.checkOut,
+    })),
+    {
+      from: new Date(0), // This is 01 January 1970 00:00:00 UTC.
+      to: new Date(today.getTime() - 24 * 60 * 60 * 1000), // This is yesterday.
+    },
+  ]
+  return disabledDays
+}
+
+export const generateDateRange = (range: DateRange | undefined): string[] => {
+  if (!range || !range.from || !range.to) return []
+
+  let currentDate = new Date(range.from)
+  const endDate = new Date(range.to)
+  const dateRange: string[] = []
+
+  while (currentDate <= endDate) {
+    const dateString = currentDate.toISOString().split('T')[0]
+    dateRange.push(dateString)
+    currentDate.setDate(currentDate.getDate() + 1)
+  }
+
+  return dateRange
+}
+
+export const generateDisabledDates = (
+  disabledDays: DateRange[],
+): { [key: string]: boolean } => {
+  if (disabledDays.length === 0) return {}
+
+  const disabledDates: { [key: string]: boolean } = {}
+
+  disabledDays.forEach((range) => {
+    if (!range.from || !range.to) return
+
+    let currentDate = new Date(range.from)
+    const endDate = new Date(range.to)
+
+    while (currentDate <= endDate) {
+      const dateString = currentDate.toISOString().split('T')[0]
+      disabledDates[dateString] = true
+      currentDate.setDate(currentDate.getDate() + 1)
+    }
+  })
+
+  return disabledDates
+}
+
+export function calculateDaysBetween({
+  checkIn,
+  checkOut,
+}: {
+  checkIn: Date
+  checkOut: Date
+}) {
+  // Calculate the difference in milliseconds
+  const diffInMs = Math.abs(checkOut.getTime() - checkIn.getTime())
+
+  // Convert the difference in milliseconds to days
+  const diffInDays = diffInMs / (1000 * 60 * 60 * 24)
+
+  return diffInDays
+}
+```
+
+### BoookingCalendar
+
+```tsx
+'use client'
+import { Calendar } from '@/components/ui/calendar'
+import { useEffect, useState } from 'react'
+import { useToast } from '@/components/ui/use-toast'
+import { DateRange } from 'react-day-picker'
+import { useProperty } from '@/utils/store'
+
+import {
+  generateDisabledDates,
+  generateDateRange,
+  defaultSelected,
+  generateBlockedPeriods,
+} from '@/utils/calendar'
+
+function BookingCalendar() {
+  const currentDate = new Date()
+
+  const [range, setRange] = useState<DateRange | undefined>(defaultSelected)
+
+  useEffect(() => {
+    useProperty.setState({ range })
+  }, [range])
+
+  return (
+    <Calendar
+      mode='range'
+      defaultMonth={currentDate}
+      selected={range}
+      onSelect={setRange}
+      className='mb-4'
+    />
+  )
+}
+export default BookingCalendar
+```
+
+### BookingContainer
+
+```tsx
+'use client'
+
+import { useProperty } from '@/utils/store'
+import ConfirmBooking from './ConfirmBooking'
+import BookingForm from './BookingForm'
+function BookingContainer() {
+  const { range } = useProperty((state) => state)
+
+  if (!range || !range.from || !range.to) return null
+  if (range.to.getTime() === range.from.getTime()) return null
+  return (
+    <div className='w-full'>
+      <BookingForm />
+      <ConfirmBooking />
+    </div>
+  )
+}
+
+export default BookingContainer
+```
+
+### CalculateTotals
+
+- utils/calculateTotals.ts
+
+```ts
+import { calculateDaysBetween } from '@/utils/calendar'
+
+type BookingDetails = {
+  checkIn: Date
+  checkOut: Date
+  price: number
+}
+
+export const calculateTotals = ({
+  checkIn,
+  checkOut,
+  price,
+}: BookingDetails) => {
+  const totalNights = calculateDaysBetween({ checkIn, checkOut })
+  const subTotal = totalNights * price
+  const cleaning = 21
+  const service = 40
+  const tax = subTotal * 0.1
+  const orderTotal = subTotal + cleaning + service + tax
+  return { totalNights, subTotal, cleaning, service, tax, orderTotal }
+}
+```
+
+### BookingForm
+
+```tsx
+import { calculateTotals } from '@/utils/calculateTotals'
+import { Card, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { useProperty } from '@/utils/store'
+import { formatCurrency } from '@/utils/format'
+function BookingForm() {
+  const { range, price } = useProperty((state) => state)
+  const checkIn = range?.from as Date
+  const checkOut = range?.to as Date
+
+  const { totalNights, subTotal, cleaning, service, tax, orderTotal } =
+    calculateTotals({
+      checkIn,
+      checkOut,
+      price,
+    })
+  return (
+    <Card className='mb-4 p-8'>
+      <CardTitle className='mb-8'>Summary </CardTitle>
+      <FormRow
+        label={`$${price} x ${totalNights} nights`}
+        amount={subTotal}
+      />
+      <FormRow
+        label='Cleaning Fee'
+        amount={cleaning}
+      />
+      <FormRow
+        label='Service Fee'
+        amount={service}
+      />
+      <FormRow
+        label='Tax'
+        amount={tax}
+      />
+      <Separator className='mt-4' />
+      <CardTitle className='mt-8'>
+        <FormRow
+          label='Booking Total'
+          amount={orderTotal}
+        />
+      </CardTitle>
+    </Card>
+  )
+}
+
+function FormRow({ label, amount }: { label: string; amount: number }) {
+  return (
+    <p className='mb-2 flex justify-between text-sm'>
+      <span>{label}</span>
+      <span>{formatCurrency(amount)}</span>
+    </p>
+  )
+}
+
+export default BookingForm
+```
+
+### ConfirmBooking
+
+- action.ts
+
+```ts
+export const createBookingAction = async () => {
+  return { message: 'create booking' }
+}
+```
+
+```tsx
+'use client'
+import { SignInButton, useAuth } from '@clerk/nextjs'
+import { Button } from '@/components/ui/button'
+import { useProperty } from '@/utils/store'
+import FormContainer from '@/components/form/FormContainer'
+import { SubmitButton } from '@/components/form/Buttons'
+import { createBookingAction } from '@/utils/actions'
+
+function ConfirmBooking() {
+  const { userId } = useAuth()
+  const { propertyId, range } = useProperty((state) => state)
+  const checkIn = range?.from as Date
+  const checkOut = range?.to as Date
+  if (!userId)
+    return (
+      <SignInButton mode='modal'>
+        <Button
+          type='button'
+          className='w-full'
+        >
+          Sign In to Complete Booking
+        </Button>
+      </SignInButton>
+    )
+
+  const createBooking = createBookingAction.bind(null, {
+    propertyId,
+    checkIn,
+    checkOut,
+  })
+  return (
+    <section>
+      <FormContainer action={createBooking}>
+        <SubmitButton
+          text='Reserve'
+          className='w-full'
+        />
+      </FormContainer>
+    </section>
+  )
+}
+export default ConfirmBooking
+```
+
+### CreateBookingAction
+
+```tsx
+export const createBookingAction = async (prevState: {
+  propertyId: string
+  checkIn: Date
+  checkOut: Date
+}) => {
+  const user = await getAuthUser()
+
+  const { propertyId, checkIn, checkOut } = prevState
+  const property = await db.property.findUnique({
+    where: { id: propertyId },
+    select: { price: true },
+  })
+  if (!property) {
+    return { message: 'Property not found' }
+  }
+  const { orderTotal, totalNights } = calculateTotals({
+    checkIn,
+    checkOut,
+    price: property.price,
+  })
+
+  try {
+    const booking = await db.booking.create({
+      data: {
+        checkIn,
+        checkOut,
+        orderTotal,
+        totalNights,
+        profileId: user.id,
+        propertyId,
+      },
+    })
+  } catch (error) {
+    return renderError(error)
+  }
+  redirect('/bookings')
+}
+```
+
+### Blocked Periods/Dates
+
+BookingCalendar.tsx
+
+```tsx
+function BookingCalendar() {
+  const bookings = useProperty((state) => state.bookings)
+  const blockedPeriods = generateBlockedPeriods({
+    bookings,
+    today: currentDate,
+  })
+
+  return (
+    <Calendar
+      mode='range'
+      defaultMonth={currentDate}
+      selected={range}
+      onSelect={setRange}
+      className='mb-4'
+      // add disabled
+      disabled={blockedPeriods}
+    />
+  )
+}
+export default BookingCalendar
+```
+
+### Unavailable Dates
+
+BookingCalendar.tsx
+
+```tsx
+
+unction BookingCalendar() {
+
+  const { toast } = useToast();
+  const unavailableDates = generateDisabledDates(blockedPeriods);
+
+  useEffect(() => {
+    const selectedRange = generateDateRange(range);
+    const isDisabledDateIncluded = selectedRange.some((date) => {
+      if (unavailableDates[date]) {
+        setRange(defaultSelected);
+        toast({
+          description: 'Some dates are booked. Please select again.',
+        });
+        return true;
+      }
+      return false;
+    });
+    useProperty.setState({ range });
+  }, [range]);
+
+
+  return (
+    <Calendar
+      mode='range'
+      defaultMonth={currentDate}
+      selected={range}
+      onSelect={setRange}
+      className='mb-4'
+      // add disabled
+      disabled={blockedPeriods}
+    />
+  );
+}
+export default BookingCalendar;
+
+
+```
+
+### Fetch Bookings and Delete Booking
+
+- actions.ts
+
+```ts
+export const fetchBookings = async () => {
+  const user = await getAuthUser()
+  const bookings = await db.booking.findMany({
+    where: {
+      profileId: user.id,
+    },
+    include: {
+      property: {
+        select: {
+          id: true,
+          name: true,
+          country: true,
+        },
+      },
+    },
+    orderBy: {
+      checkIn: 'desc',
+    },
+  })
+  return bookings
+}
+
+export async function deleteBookingAction(prevState: { bookingId: string }) {
+  const { bookingId } = prevState
+  const user = await getAuthUser()
+
+  try {
+    const result = await db.booking.delete({
+      where: {
+        id: bookingId,
+        profileId: user.id,
+      },
+    })
+
+    revalidatePath('/bookings')
+    return { message: 'Booking deleted successfully' }
+  } catch (error) {
+    return renderError(error)
+  }
+}
+```
+
+### Bookings Page
+
+- utils/format.ts
+
+```ts
+export const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date)
+}
+```
+
+Bookings.tsx
+
+```tsx
+import EmptyList from '@/components/home/EmptyList'
+import CountryFlagAndName from '@/components/card/CountryFlagAndName'
+import Link from 'next/link'
+
+import { formatDate, formatCurrency } from '@/utils/format'
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+
+import FormContainer from '@/components/form/FormContainer'
+import { IconButton } from '@/components/form/Buttons'
+import { fetchBookings, deleteBookingAction } from '@/utils/actions'
+
+async function BookingsPage() {
+  const bookings = await fetchBookings()
+  if (bookings.length === 0) {
+    return <EmptyList />
+  }
+  return (
+    <div className='mt-16'>
+      <h4 className='mb-4 capitalize'>total bookings : {bookings.length}</h4>
+      <Table>
+        <TableCaption>A list of your recent bookings.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Property Name</TableHead>
+            <TableHead>Country</TableHead>
+            <TableHead>Nights</TableHead>
+            <TableHead>Total</TableHead>
+            <TableHead>Check In</TableHead>
+            <TableHead>Check Out</TableHead>
+            <TableHead>Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {bookings.map((booking) => {
+            const { id, orderTotal, totalNights, checkIn, checkOut } = booking
+            const { id: propertyId, name, country } = booking.property
+            const startDate = formatDate(checkIn)
+            const endDate = formatDate(checkOut)
+            return (
+              <TableRow key={id}>
+                <TableCell>
+                  <Link
+                    href={`/properties/${propertyId}`}
+                    className='text-muted-foreground tracking-wide underline'
+                  >
+                    {name}
+                  </Link>
+                </TableCell>
+                <TableCell>
+                  <CountryFlagAndName countryCode={country} />
+                </TableCell>
+                <TableCell>{totalNights}</TableCell>
+                <TableCell>{formatCurrency(orderTotal)}</TableCell>
+                <TableCell>{startDate}</TableCell>
+                <TableCell>{endDate}</TableCell>
+                <TableCell>
+                  <DeleteBooking bookingId={id} />
+                </TableCell>
+              </TableRow>
+            )
+          })}
+        </TableBody>
+      </Table>
+    </div>
+  )
+}
+
+function DeleteBooking({ bookingId }: { bookingId: string }) {
+  const deleteBooking = deleteBookingAction.bind(null, { bookingId })
+  return (
+    <FormContainer action={deleteBooking}>
+      <IconButton actionType='delete' />
+    </FormContainer>
+  )
+}
+
+export default BookingsPage
+```
+
+### LoadingTable
+
+- create @/components/booking/LoadingTable.tsx
+
+```tsx
+import { Skeleton } from '../ui/skeleton'
+
+function LoadingTable({ rows }: { rows?: number }) {
+  const tableRows = Array.from({ length: rows || 5 }, (_, i) => {
+    return (
+      <div
+        className='mb-4'
+        key={i}
+      >
+        <Skeleton className='h-8 w-full rounded' />
+      </div>
+    )
+  })
+  return <>{tableRows}</>
+}
+export default LoadingTable
+```
+
+- create app/bookings/loading.tsx
+
+```tsx
+'use client'
+
+import LoadingTable from '@/components/booking/LoadingTable'
+
+function loading() {
+  return <LoadingTable />
+}
+
+export default loading
+```
+
+### Fetch and Delete Rentals
+
+- actions.ts
+
+```ts
+export const fetchRentals = async () => {
+  const user = await getAuthUser()
+  const rentals = await db.property.findMany({
+    where: {
+      profileId: user.id,
+    },
+    select: {
+      id: true,
+      name: true,
+      price: true,
+    },
+  })
+
+  const rentalsWithBookingSums = await Promise.all(
+    rentals.map(async (rental) => {
+      const totalNightsSum = await db.booking.aggregate({
+        where: {
+          propertyId: rental.id,
+        },
+        _sum: {
+          totalNights: true,
+        },
+      })
+
+      const orderTotalSum = await db.booking.aggregate({
+        where: {
+          propertyId: rental.id,
+        },
+        _sum: {
+          orderTotal: true,
+        },
+      })
+
+      return {
+        ...rental,
+        totalNightsSum: totalNightsSum._sum.totalNights,
+        orderTotalSum: orderTotalSum._sum.orderTotal,
+      }
+    }),
+  )
+
+  return rentalsWithBookingSums
+}
+
+export async function deleteRentalAction(prevState: { propertyId: string }) {
+  const { propertyId } = prevState
+  const user = await getAuthUser()
+
+  try {
+    await db.property.delete({
+      where: {
+        id: propertyId,
+        profileId: user.id,
+      },
+    })
+
+    revalidatePath('/rentals')
+    return { message: 'Rental deleted successfully' }
+  } catch (error) {
+    return renderError(error)
+  }
+}
+```
+
+### Rentals Page
+
+- create rentals/loading.tsx
+
+```tsx
+'use client'
+import LoadingTable from '@/components/booking/LoadingTable'
+function loading() {
+  return <LoadingTable />
+}
+export default loading
+```
+
+```tsx
+import EmptyList from '@/components/home/EmptyList'
+import { fetchRentals, deleteRentalAction } from '@/utils/actions'
+import Link from 'next/link'
+
+import { formatCurrency } from '@/utils/format'
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+
+import FormContainer from '@/components/form/FormContainer'
+import { IconButton } from '@/components/form/Buttons'
+
+async function RentalsPage() {
+  const rentals = await fetchRentals()
+
+  if (rentals.length === 0) {
+    return (
+      <EmptyList
+        heading='No rentals to display.'
+        message="Don't hesitate to create a rental."
+      />
+    )
+  }
+
+  return (
+    <div className='mt-16'>
+      <h4 className='mb-4 capitalize'>Active Properties : {rentals.length}</h4>
+      <Table>
+        <TableCaption>A list of all your properties.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Property Name</TableHead>
+            <TableHead>Nightly Rate </TableHead>
+            <TableHead>Nights Booked</TableHead>
+            <TableHead>Total Income</TableHead>
+            <TableHead>Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {rentals.map((rental) => {
+            const { id: propertyId, name, price } = rental
+            const { totalNightsSum, orderTotalSum } = rental
+            return (
+              <TableRow key={propertyId}>
+                <TableCell>
+                  <Link
+                    href={`/properties/${propertyId}`}
+                    className='text-muted-foreground tracking-wide underline'
+                  >
+                    {name}
+                  </Link>
+                </TableCell>
+                <TableCell>{formatCurrency(price)}</TableCell>
+                <TableCell>{totalNightsSum || 0}</TableCell>
+                <TableCell>{formatCurrency(orderTotalSum)}</TableCell>
+
+                <TableCell className='flex items-center gap-x-2'>
+                  <Link href={`/rentals/${propertyId}/edit`}>
+                    <IconButton actionType='edit'></IconButton>
+                  </Link>
+                  <DeleteRental propertyId={propertyId} />
+                </TableCell>
+              </TableRow>
+            )
+          })}
+        </TableBody>
+      </Table>
+    </div>
+  )
+}
+
+function DeleteRental({ propertyId }: { propertyId: string }) {
+  const deleteRental = deleteRentalAction.bind(null, { propertyId })
+  return (
+    <FormContainer action={deleteRental}>
+      <IconButton actionType='delete' />
+    </FormContainer>
+  )
+}
+
+export default RentalsPage
+```
+
+### Fetch Rental Details
+
+- actions.ts
+
+```ts
+export const fetchRentalDetails = async (propertyId: string) => {
+  const user = await getAuthUser()
+
+  return db.property.findUnique({
+    where: {
+      id: propertyId,
+      profileId: user.id,
+    },
+  })
+}
+
+export const updatePropertyAction = async () => {
+  return { message: 'update property action' }
+}
+
+export const updatePropertyImageAction = async () => {
+  return { message: 'update property image' }
+}
+```
+
+### Rentals Edit Page
+
+- rentals/[id]/edit/page.tsx
+
+```tsx
+import {
+  fetchRentalDetails,
+  updatePropertyImageAction,
+  updatePropertyAction,
+} from '@/utils/actions'
+import FormContainer from '@/components/form/FormContainer'
+import FormInput from '@/components/form/FormInput'
+import CategoriesInput from '@/components/form/CategoriesInput'
+import PriceInput from '@/components/form/PriceInput'
+import TextAreaInput from '@/components/form/TextAreaInput'
+import CountriesInput from '@/components/form/CountriesInput'
+import CounterInput from '@/components/form/CounterInput'
+import AmenitiesInput from '@/components/form/AmenitiesInput'
+import { SubmitButton } from '@/components/form/Buttons'
+import { redirect } from 'next/navigation'
+import { type Amenity } from '@/utils/amenities'
+import ImageInputContainer from '@/components/form/ImageInputContainer'
+
+async function EditRentalPage({ params }: { params: { id: string } }) {
+  const property = await fetchRentalDetails(params.id)
+
+  if (!property) redirect('/')
+
+  const defaultAmenities: Amenity[] = JSON.parse(property.amenities)
+
+  return (
+    <section>
+      <h1 className='mb-8 text-2xl font-semibold capitalize'>Edit Property</h1>
+      <div className='rounded-md border p-8 '>
+        <ImageInputContainer
+          name={property.name}
+          text='Update Image'
+          action={updatePropertyImageAction}
+          image={property.image}
+        >
+          <input
+            type='hidden'
+            name='id'
+            value={property.id}
+          />
+        </ImageInputContainer>
+
+        <FormContainer action={updatePropertyAction}>
+          <input
+            type='hidden'
+            name='id'
+            value={property.id}
+          />
+          <div className='mb-4 mt-8 grid gap-8 md:grid-cols-2'>
+            <FormInput
+              name='name'
+              type='text'
+              label='Name (20 limit)'
+              defaultValue={property.name}
+            />
+            <FormInput
+              name='tagline'
+              type='text '
+              label='Tagline (30 limit)'
+              defaultValue={property.tagline}
+            />
+            <PriceInput defaultValue={property.price} />
+            <CategoriesInput defaultValue={property.category} />
+            <CountriesInput defaultValue={property.country} />
+          </div>
+
+          <TextAreaInput
+            name='description'
+            labelText='Description (10 - 100 Words)'
+            defaultValue={property.description}
+          />
+
+          <h3 className='mb-4 mt-8 text-lg font-medium'>
+            Accommodation Details
+          </h3>
+          <CounterInput
+            detail='guests'
+            defaultValue={property.guests}
+          />
+          <CounterInput
+            detail='bedrooms'
+            defaultValue={property.bedrooms}
+          />
+          <CounterInput
+            detail='beds'
+            defaultValue={property.beds}
+          />
+          <CounterInput
+            detail='baths'
+            defaultValue={property.baths}
+          />
+          <h3 className='mb-6 mt-10 text-lg font-medium'>Amenities</h3>
+          <AmenitiesInput defaultValue={defaultAmenities} />
+          <SubmitButton
+            text='edit property'
+            className='mt-12'
+          />
+        </FormContainer>
+      </div>
+    </section>
+  )
+}
+export default EditRentalPage
+```
+
+### Amenities Input
+
+```tsx
+'use client'
+import { useState } from 'react'
+import { amenities, Amenity } from '@/utils/amenities'
+import { Checkbox } from '@/components/ui/checkbox'
+
+function AmenitiesInput({ defaultValue }: { defaultValue?: Amenity[] }) {
+  const amenitiesWithIcons = defaultValue?.map(({ name, selected }) => ({
+    name,
+    selected,
+    icon: amenities.find((amenity) => amenity.name === name)!.icon,
+  }))
+  const [selectedAmenities, setSelectedAmenities] = useState<Amenity[]>(
+    amenitiesWithIcons || amenities,
+  )
+  const handleChange = (amenity: Amenity) => {
+    setSelectedAmenities((prev) => {
+      return prev.map((a) => {
+        if (a.name === amenity.name) {
+          return { ...a, selected: !a.selected }
+        }
+        return a
+      })
+    })
+  }
+
+  return (
+    <section>
+      <input
+        type='hidden'
+        name='amenities'
+        value={JSON.stringify(selectedAmenities)}
+      />
+      <div className='grid grid-cols-2 gap-4'>
+        {selectedAmenities.map((amenity) => {
+          return (
+            <div
+              key={amenity.name}
+              className='flex items-center space-x-2'
+            >
+              <Checkbox
+                id={amenity.name}
+                checked={amenity.selected}
+                onCheckedChange={() => handleChange(amenity)}
+              />
+              <label
+                htmlFor={amenity.name}
+                className='flex items-center gap-x-2 text-sm font-medium capitalize leading-none'
+              >
+                {amenity.name} <amenity.icon className='h-4 w-4' />
+              </label>
+            </div>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
+export default AmenitiesInput
+```
+
+### Update Property Action
+
+```ts
+export const updatePropertyAction = async (
+  prevState: any,
+  formData: FormData,
+): Promise<{ message: string }> => {
+  const user = await getAuthUser()
+  const propertyId = formData.get('id') as string
+
+  try {
+    const rawData = Object.fromEntries(formData)
+    const validatedFields = validateWithZodSchema(propertySchema, rawData)
+    await db.property.update({
+      where: {
+        id: propertyId,
+        profileId: user.id,
+      },
+      data: {
+        ...validatedFields,
+      },
+    })
+
+    revalidatePath(`/rentals/${propertyId}/edit`)
+    return { message: 'Update Successful' }
+  } catch (error) {
+    return renderError(error)
+  }
+}
+```
+
+### Update Property Image Action
+
+```ts
+export const updatePropertyImageAction = async (
+  prevState: any,
+  formData: FormData,
+): Promise<{ message: string }> => {
+  const user = await getAuthUser()
+  const propertyId = formData.get('id') as string
+
+  try {
+    const image = formData.get('image') as File
+    const validatedFields = validateWithZodSchema(imageSchema, { image })
+    const fullPath = await uploadImage(validatedFields.image)
+
+    await db.property.update({
+      where: {
+        id: propertyId,
+        profileId: user.id,
+      },
+      data: {
+        image: fullPath,
+      },
+    })
+    revalidatePath(`/rentals/${propertyId}/edit`)
+    return { message: 'Property Image Updated Successful' }
+  } catch (error) {
+    return renderError(error)
+  }
+}
+```
+
+### Reservations
+
+- in app/reservations create page.tsx and loading.tsx
+
+```tsx
+'use client'
+
+import LoadingTable from '@/components/booking/LoadingTable'
+
+function loading() {
+  return <LoadingTable />
+}
+export default loading
+```
+
+- add to links
+
+utils/links.ts
+
+```ts
+export const links: NavLink[] = [
+  { href: '/', label: 'home' },
+  { href: '/favorites ', label: 'favorites' },
+  { href: '/bookings ', label: 'bookings' },
+  { href: '/reviews ', label: 'reviews' },
+  { href: '/reservations ', label: 'reservations' },
+  { href: '/rentals/create ', label: 'create rental' },
+  { href: '/rentals', label: 'my rentals' },
+  { href: '/profile ', label: 'profile' },
+]
+```
+
+### Fetch Reservations
+
+```ts
+export const fetchReservations = async () => {
+  const user = await getAuthUser()
+
+  const reservations = await db.booking.findMany({
+    where: {
+      property: {
+        profileId: user.id,
+      },
+    },
+
+    orderBy: {
+      createdAt: 'desc', // or 'asc' for ascending order
+    },
+
+    include: {
+      property: {
+        select: {
+          id: true,
+          name: true,
+          price: true,
+          country: true,
+        },
+      }, // include property details in the result
+    },
+  })
+  return reservations
+}
+```
+
+### Reservations Page
+
+```tsx
+import { fetchReservations } from '@/utils/actions'
+import Link from 'next/link'
+import EmptyList from '@/components/home/EmptyList'
+import CountryFlagAndName from '@/components/card/CountryFlagAndName'
+
+import { formatDate, formatCurrency } from '@/utils/format'
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+
+async function ReservationsPage() {
+  const reservations = await fetchReservations()
+
+  if (reservations.length === 0) {
+    return <EmptyList />
+  }
+
+  return (
+    <div className='mt-16'>
+      <h4 className='mb-4 capitalize'>
+        total reservations : {reservations.length}
+      </h4>
+      <Table>
+        <TableCaption>A list of your recent reservations.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Property Name</TableHead>
+            <TableHead>Country</TableHead>
+            <TableHead>Nights</TableHead>
+            <TableHead>Total</TableHead>
+            <TableHead>Check In</TableHead>
+            <TableHead>Check Out</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {reservations.map((item) => {
+            const { id, orderTotal, totalNights, checkIn, checkOut } = item
+            const { id: propertyId, name, country } = item.property
+            const startDate = formatDate(checkIn)
+            const endDate = formatDate(checkOut)
+            return (
+              <TableRow key={id}>
+                <TableCell>
+                  <Link
+                    href={`/properties/${propertyId}`}
+                    className='text-muted-foreground tracking-wide underline'
+                  >
+                    {name}
+                  </Link>
+                </TableCell>
+                <TableCell>
+                  <CountryFlagAndName countryCode={country} />
+                </TableCell>
+                <TableCell>{totalNights}</TableCell>
+                <TableCell>{formatCurrency(orderTotal)}</TableCell>
+                <TableCell>{startDate}</TableCell>
+                <TableCell>{endDate}</TableCell>
+              </TableRow>
+            )
+          })}
+        </TableBody>
+      </Table>
+    </div>
+  )
+}
+export default ReservationsPage
+```
+
+### Admin User - Setup
+
+- create app/admin/page.tsx
+- add admin to links
+- create components/admin
+  - Chart.tsx
+  - ChartsContainer.tsx
+  - Loading.tsx
+  - StatsCard.tsx
+  - StatsContainer.tsx
+
+### Admin User - Middleware
+
+- refactor middleware
+- create ENV variable with userId
+- add to VERCEL
+
+```ts
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+
+import { NextResponse } from 'next/server'
+
+const isPublicRoute = createRouteMatcher(['/', '/properties(.*)'])
+
+const isAdminRoute = createRouteMatcher(['/admin(.*)'])
+export default clerkMiddleware(async (auth, req) => {
+  const isAdminUser = auth().userId === process.env.ADMIN_USER_ID
+  if (isAdminRoute(req) && !isAdminUser) {
+    return NextResponse.redirect(new URL('/', req.url))
+  }
+  if (!isPublicRoute(req)) auth().protect()
+})
+
+export const config = {
+  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+}
+```
+
+### Admin User - LinksDropdown
+
+- LinksDropdown.tsx
+
+```tsx
+import { auth } from '@clerk/nextjs/server'
+
+function LinksDropdown() {
+  const { userId } = auth()
+  const isAdminUser = userId === process.env.ADMIN_USER_ID
+}
+return (
+  <>
+    {links.map((link) => {
+      if (link.label === 'admin' && !isAdminUser) return null
+      return (
+        <DropdownMenuItem key={link.href}>
+          <Link
+            href={link.href}
+            className='w-full capitalize'
+          >
+            {link.label}
+          </Link>
+        </DropdownMenuItem>
+      )
+    })}
+  </>
+)
+```
+
+### Admin User - Loading
+
+```tsx
+import { Card, CardHeader } from '@/components/ui/card'
+import { Skeleton } from '@/components/ui/skeleton'
+
+export function StatsLoadingContainer() {
+  return (
+    <div className='mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+      <LoadingCard />
+      <LoadingCard />
+      <LoadingCard />
+    </div>
+  )
+}
+
+function LoadingCard() {
+  return (
+    <Card>
+      <CardHeader>
+        <Skeleton className='h-20 w-full rounded' />
+      </CardHeader>
+    </Card>
+  )
+}
+
+export function ChartsLoadingContainer() {
+  return <Skeleton className='mt-16 h-[300px] w-full rounded' />
+}
+```
+
+### Admin User - Main Page
+
+```tsx
+import ChartsContainer from '@/components/admin/ChartsContainer'
+import StatsContainer from '@/components/admin/StatsContainer'
+import {
+  ChartsLoadingContainer,
+  StatsLoadingContainer,
+} from '@/components/admin/Loading'
+import { Suspense } from 'react'
+async function AdminPage() {
+  return (
+    <>
+      <Suspense fallback={<StatsLoadingContainer />}>
+        <StatsContainer />
+      </Suspense>
+      <Suspense fallback={<ChartsLoadingContainer />}>
+        <ChartsContainer />
+      </Suspense>
+    </>
+  )
+}
+export default AdminPage
+```
+
+### Admin User - Fetch Stats
+
+```ts
+const getAdminUser = async () => {
+  const user = await getAuthUser()
+  if (user.id !== process.env.ADMIN_USER_ID) redirect('/')
+  return user
+}
+
+export const fetchStats = async () => {
+  await getAdminUser()
+
+  const usersCount = await db.profile.count()
+  const propertiesCount = await db.property.count()
+  const bookingsCount = await db.booking.count()
+
+  return {
+    usersCount,
+    propertiesCount,
+    bookingsCount,
+  }
+}
+```
+
+### Admin User - StatsContainer
+
+```tsx
+import { fetchStats } from '@/utils/actions'
+import StatsCard from './StatsCard'
+async function StatsContainer() {
+  const data = await fetchStats()
+
+  return (
+    <div className='mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+      <StatsCard
+        title='users'
+        value={data?.usersCount || 0}
+      />
+      <StatsCard
+        title='properties'
+        value={data?.propertiesCount || 0}
+      />
+      <StatsCard
+        title='bookings'
+        value={data?.bookingsCount || 0}
+      />
+    </div>
+  )
+}
+export default StatsContainer
+```
+
+### Admin User - StatsCard
+
+```tsx
+import { Card, CardHeader } from '@/components/ui/card'
+
+type StatsCardsProps = {
+  title: string
+  value: number
+}
+
+function StatsCards({ title, value }: StatsCardsProps) {
+  return (
+    <Card className='bg-muted'>
+      <CardHeader className='flex flex-row items-center justify-between'>
+        <h3 className='text-3xl font-bold capitalize'>{title}</h3>
+        <span className='text-primary text-5xl font-extrabold'>{value}</span>
+      </CardHeader>
+    </Card>
+  )
+}
+
+export default StatsCards
+```
+
+### Admin User - Fetch Charts Data
+
+```ts
+export const fetchChartsData = async () => {
+  await getAdminUser()
+  const date = new Date()
+  date.setMonth(date.getMonth() - 6)
+  const sixMonthsAgo = date
+
+  const bookings = await db.booking.findMany({
+    where: {
+      createdAt: {
+        gte: sixMonthsAgo,
+      },
+    },
+    orderBy: {
+      createdAt: 'asc',
+    },
+  })
+  let bookingsPerMonth = bookings.reduce(
+    (total, current) => {
+      const date = formatDate(current.createdAt, true)
+
+      const existingEntry = total.find((entry) => entry.date === date)
+      if (existingEntry) {
+        existingEntry.count += 1
+      } else {
+        total.push({ date, count: 1 })
+      }
+      return total
+    },
+    [] as Array<{ date: string; count: number }>,
+  )
+  return bookingsPerMonth
+}
+```
+
+### Admin User - ChartsContainer
+
+```tsx
+import { fetchChartsData } from '@/utils/actions'
+import Chart from './Chart'
+
+async function ChartsContainer() {
+  const bookings = await fetchChartsData()
+  if (bookings.length < 1) return null
+
+  return <Chart data={bookings} />
+}
+export default ChartsContainer
+```
+
+### Recharts
+
+[Recharts](https://recharts.org/en-US/)
+
+```sh
+npm install recharts
+```
+
+### Admin User - Chart Component
+
+```tsx
+'use client'
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts'
+
+type ChartPropsType = {
+  data: {
+    date: string
+    count: number
+  }[]
+}
+
+function Chart({ data }: ChartPropsType) {
+  return (
+    <section className='mt-24'>
+      <h1 className='text-center text-4xl font-semibold'>Monthly Bookings</h1>
+      <ResponsiveContainer
+        width='100%'
+        height={300}
+      >
+        <BarChart
+          data={data}
+          margin={{ top: 50 }}
+        >
+          <CartesianGrid strokeDasharray='3 3' />
+          <XAxis dataKey='date' />
+          <YAxis allowDecimals={false} />
+          <Tooltip />
+          <Bar
+            dataKey='count'
+            fill='#F97215'
+            barSize={75}
+          />
+        </BarChart>
+      </ResponsiveContainer>
+    </section>
+  )
+}
+export default Chart
+```
