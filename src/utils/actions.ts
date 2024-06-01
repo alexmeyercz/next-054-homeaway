@@ -14,7 +14,6 @@ import { redirect } from 'next/navigation'
 import { auth, clerkClient, currentUser } from '@clerk/nextjs/server'
 import { paths } from './paths'
 import { uploadImage } from './supabase'
-import { NextFontManifestPlugin } from 'next/dist/build/webpack/plugins/next-font-manifest-plugin'
 
 const f = '⇒ actions.ts:'
 
