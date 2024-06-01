@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, type FC } from 'react'
 import { useProperty } from '@/utils/store'
 import { Booking } from '@/utils/types'
