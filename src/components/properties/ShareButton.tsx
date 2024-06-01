@@ -27,7 +27,7 @@ type ShareButtonProps = {
 const ShareButton: FC<ShareButtonProps> = ({ propertyId, name }) => {
   const url = process.env.NEXT_PUBLIC_WEBSITE_URL
   const shareLink = `${url}/properties/${propertyId}`
-  console.log(f, 'shareLink →', shareLink)
+
   return (
     <Popover>
       <PopoverTrigger asChild>

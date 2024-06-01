@@ -21,3 +21,13 @@ export type RatingCountType = {
   rating: number
   count: number
 }
+
+export type DateRangeSelect = {
+  startDate: Date
+  endDate: Date
+  key: string
+}
+export type Booking = {
+  checkIn: Date
+  checkOut: Date
+}

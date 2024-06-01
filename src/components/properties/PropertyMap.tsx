@@ -22,7 +22,6 @@ type PropertyMapProps = { countryCode: string }
 const PropertyMap: FC<PropertyMapProps> = ({ countryCode }) => {
   const defaultLocation = [51.505, -0.09] as [number, number]
   const location = findCountryByCode(countryCode)?.location as [number, number]
-  console.log(f, 'location →', location)
 
   return (
     <div className='mt-4'>
