@@ -127,3 +127,13 @@ export type ReviewInfoType = {
   name: string
   image: string
 }
+
+export type ReviewPropertyType = {
+  id: string
+  rating: number
+  comment: string
+  property: {
+    name: string
+    image: string
+  }
+}

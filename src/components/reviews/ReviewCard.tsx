@@ -29,14 +29,13 @@ const ReviewCard: FC<ReviewCardProps> = ({ reviewInfo, children }) => {
             <h3>{name}</h3>
             <Rating rating={rating} />
           </div>
-          {children}
         </div>
       </CardHeader>
       <CardContent>
         <Comment comment={comment} />
       </CardContent>
       {/* delete button later */}
-      <div className='absolute right-3 top-3'></div>
+      <div className='absolute right-3 top-3'>{children}</div>
     </Card>
   )
 }
