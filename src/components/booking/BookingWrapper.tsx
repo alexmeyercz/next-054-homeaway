@@ -1,14 +1,34 @@
-import React, { type FC } from 'react'
+import React, { useEffect, type FC } from 'react'
+import { useProperty } from '@/utils/store'
+import { Booking } from '@/utils/types'
+import BookingCalendar from './BookingCalendar'
+import BookingContainer from './BookingContainer'
 
 const f = '⇒ BookingWrapper.tsx:'
 
-type BookingWrapperProps = {}
+type BookingWrapperProps = {
+  propertyId: string
+  price: number
+  bookings: Booking[]
+}
 
-const BookingWrapper: FC<BookingWrapperProps> = () => {
+const BookingWrapper: FC<BookingWrapperProps> = ({
+  propertyId,
+  price,
+  bookings,
+}) => {
+  useEffect(() => {
+    useProperty.setState({
+      propertyId,
+      price,
+      bookings,
+    })
+  }, [])
   return (
-    <div>
-      <h1>BookingWrapper</h1>
-    </div>
+    <>
+      <BookingCalendar />
+      <BookingContainer />
+    </>
   )
 }
 export default BookingWrapper
