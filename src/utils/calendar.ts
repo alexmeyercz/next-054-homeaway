@@ -67,19 +67,18 @@ export const generateDisabledDates = (
   return disabledDates
 }
 
-type calculateDaysBetweenProps = {
-  checkIn: Date
-  checkOut: Date
-}
 export function calculateDaysBetween({
   checkIn,
   checkOut,
-}: calculateDaysBetweenProps) {
+}: {
+  checkIn: Date
+  checkOut: Date
+}) {
   // Calculate the difference in milliseconds
-  const diffInMs: number = Math.abs(checkOut.getTime() - checkIn.getTime())
+  const diffInMs = Math.abs(checkOut.getTime() - checkIn.getTime())
 
   // Convert the difference in milliseconds to days
-  const diffInDays: number = diffInMs / (1000 * 60 * 60 * 24)
+  const diffInDays = diffInMs / (1000 * 60 * 60 * 24)
 
   return diffInDays
 }

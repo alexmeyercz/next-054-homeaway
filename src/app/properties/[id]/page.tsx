@@ -18,7 +18,7 @@ import SubmitReview from '@/components/reviews/SubmitReview'
 import PropertyReviews from '@/components/reviews/PropertyReviews'
 import { auth } from '@clerk/nextjs/server'
 
-const f = '⇒ page.tsx:'
+const f = '⇒ page.tsx (PropertyDetailPage):'
 
 const DynamicMap = dynamic(
   () => import('@/components/properties/PropertyMap'),
