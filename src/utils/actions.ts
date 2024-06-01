@@ -457,8 +457,8 @@ export const fetchBookings = async () => {
     include: {
       property: {
         select: {
+          id: true,
           name: true,
-          image: true,
           country: true,
         },
       },
