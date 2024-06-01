@@ -6,7 +6,7 @@ import ImageContainer from '@/components/properties/ImageContainer'
 import PropertyDetails from '@/components/properties/PropertyDetails'
 import ShareButton from '@/components/properties/ShareButton'
 import UserInfo from '@/components/properties/UserInfo'
-import { fetchPropertyDetails } from '@/utils/actions'
+import { fetchPropertyDetails, findExistingReview } from '@/utils/actions'
 import { paths } from '@/utils/paths'
 import { Separator } from '@/components/ui/separator'
 import { redirect } from 'next/navigation'
@@ -17,6 +17,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import dynamic from 'next/dynamic'
 import SubmitReview from '@/components/reviews/SubmitReview'
 import PropertyReviews from '@/components/reviews/PropertyReviews'
+import { auth } from '@clerk/nextjs/server'
 
 const f = '⇒ page.tsx:'
 
@@ -48,6 +49,11 @@ const PropertyDetailPage: FC<PropertyDetailPageProps> = async ({ params }) => {
   }
   const firstName = property.profile.firstName
   const profileImage = property.profile.profileImage
+
+  const { userId } = auth()
+  const isNotOwner = property.profile.clerkId !== userId
+  const reviewDoesNotExist =
+    userId && isNotOwner && !(await findExistingReview(userId, property.id))
 
   return (
     <section>
@@ -88,7 +94,7 @@ const PropertyDetailPage: FC<PropertyDetailPageProps> = async ({ params }) => {
         </div>
       </section>
       {/* after two columns section */}
-      <SubmitReview propertyId={property.id} />
+      {reviewDoesNotExist && <SubmitReview propertyId={property.id} />}
       <PropertyReviews propertyId={property.id} />
     </section>
   )
