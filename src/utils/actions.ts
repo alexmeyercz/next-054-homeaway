@@ -16,6 +16,7 @@ import { paths } from './paths'
 import { uploadImage } from './supabase'
 import { RatingCountType } from './types'
 import { calculateTotals } from './calculateTotals'
+import { create } from 'domain'
 
 const f = '⇒ actions.ts:'
 
@@ -445,4 +446,43 @@ export const createBookingAction = async (prevState: {
     return renderError(error)
   }
   redirect(paths.bookings())
+}
+
+export const fetchBookings = async () => {
+  const user = await getAuthUser()
+  const bookings = await db.booking.findMany({
+    where: {
+      profileId: user.id,
+    },
+    include: {
+      property: {
+        select: {
+          name: true,
+          image: true,
+          country: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
+  return bookings
+}
+
+export const deleteBookingAction = async (prevState: { bookingId: string }) => {
+  const { bookingId } = prevState
+  const user = await getAuthUser()
+  try {
+    await db.booking.delete({
+      where: {
+        id: bookingId,
+        profileId: user.id,
+      },
+    })
+    revalidatePath(paths.bookings())
+    return { message: 'delete booking' }
+  } catch (error) {
+    return renderError(error)
+  }
 }
