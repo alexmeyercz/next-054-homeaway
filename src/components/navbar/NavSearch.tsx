@@ -1,7 +1,7 @@
 'use client'
 import { Input } from '../ui/input'
 import React, { type FC, type ChangeEvent } from 'react'
-import { useSearchParams, usePathname, useRouter } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { useDebouncedCallback } from 'use-debounce'
 import { useState, useEffect } from 'react'
 import { paths } from '@/utils/paths'
@@ -10,7 +10,6 @@ const f = '⇒ NavSearch.tsx (NavSearch):'
 
 const NavSearch: FC = () => {
   const searchParams = useSearchParams() as URLSearchParams
-  const pathname = usePathname() as string
   const router = useRouter()
   const { replace } = router
   const [search, setSearch] = useState<string>(
@@ -29,7 +28,7 @@ const NavSearch: FC = () => {
     } else {
       params.delete('search')
     }
-    replace(`${pathname}?${params.toString()}`)
+    replace(`/?${params.toString()}`)
   }, 500)
 
   useEffect(() => {
