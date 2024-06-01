@@ -110,3 +110,20 @@ export const createReviewSchema = z.object({
   rating: z.coerce.number().int().min(1).max(5),
   comment: z.string().min(10).max(1000),
 })
+export type CreateReviewSchemaType = ZodSchema<typeof createReviewSchema>
+
+export type ReviewType = {
+  id: string
+  rating: number
+  comment: string
+  profile: {
+    firstName: string
+    profileImage: string
+  }
+}
+export type ReviewInfoType = {
+  comment: string
+  rating: number
+  name: string
+  image: string
+}

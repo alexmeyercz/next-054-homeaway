@@ -16,6 +16,7 @@ import Description from '@/components/properties/Description'
 import { Skeleton } from '@/components/ui/skeleton'
 import dynamic from 'next/dynamic'
 import SubmitReview from '@/components/reviews/SubmitReview'
+import PropertyReviews from '@/components/reviews/PropertyReviews'
 
 const f = '⇒ page.tsx:'
 
@@ -88,6 +89,7 @@ const PropertyDetailPage: FC<PropertyDetailPageProps> = async ({ params }) => {
       </section>
       {/* after two columns section */}
       <SubmitReview propertyId={property.id} />
+      <PropertyReviews propertyId={property.id} />
     </section>
   )
 }

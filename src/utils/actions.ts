@@ -1,6 +1,7 @@
 'use server'
 
 import {
+  ReviewType,
   createReviewSchema,
   imageSchema,
   profileSchema,
@@ -285,7 +286,7 @@ export const fetchPropertyDetails = (id: string) => {
 export const createReviewAction = async (
   prevState: any,
   formData: FormData,
-) => {
+): Promise<{ message: string }> => {
   const user = await getAuthUser()
 
   try {
@@ -304,7 +305,9 @@ export const createReviewAction = async (
   }
 }
 
-export const fetchPropertyReviews = async (propertyId: string) => {
+export const fetchPropertyReviews = async (
+  propertyId: string,
+): Promise<ReviewType[]> => {
   const reviews = await db.review.findMany({
     where: {
       propertyId,
