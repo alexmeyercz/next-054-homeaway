@@ -80,7 +80,7 @@ const PropertyDetailPage: FC<PropertyDetailPageProps> = async ({ params }) => {
           <Separator className='mt-4' />
           <Description description={property.description} />
           <Amenities amenities={property.amenities} />
-          {/* <DynamicMap countryCode={property.country} /> */}
+          <DynamicMap countryCode={property.country} />
         </div>
         <div className='flex flex-col items-center lg:col-span-4'>
           {/* calendar */}
