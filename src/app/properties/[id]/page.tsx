@@ -48,8 +48,6 @@ const PropertyDetailPage: FC<PropertyDetailPageProps> = async ({ params }) => {
   const firstName = property.profile.firstName
   const profileImage = property.profile.profileImage
 
-  console.log(f, 'property.country →', property.country)
-
   return (
     <section>
       <BreadCrumbs name={property.name} />
