@@ -17,4 +17,13 @@ export const paths = {
   property(id: string) {
     return `/properties/${id}`
   },
+  reviews() {
+    return '/reviews'
+  },
+  favorites() {
+    return '/favorites'
+  },
+  bookings() {
+    return '/bookings'
+  },
 }
