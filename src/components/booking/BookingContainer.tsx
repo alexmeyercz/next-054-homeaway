@@ -9,8 +9,14 @@ const f = '⇒ BookingContainer.tsx:'
 type BookingContainerProps = {}
 
 const BookingContainer: FC<BookingContainerProps> = () => {
-  const state = useProperty((state) => state)
-  console.log(f, 'state →', state)
+  const { range } = useProperty((state) => state)
+  if (!range || !range.from || !range.to) {
+    return null
+  }
+  if (range.to.getTime() === range.from.getTime()) {
+    return null
+  }
+
   return (
     <div className='w-full'>
       <BookingForm />
