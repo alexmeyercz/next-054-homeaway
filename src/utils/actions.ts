@@ -15,6 +15,7 @@ import { auth, clerkClient, currentUser } from '@clerk/nextjs/server'
 import { paths } from './paths'
 import { uploadImage } from './supabase'
 import { RatingCountType } from './types'
+import { calculateTotals } from './calculateTotals'
 
 const f = '⇒ actions.ts:'
 
@@ -406,6 +407,42 @@ export const findExistingReview = async (
   })
 }
 
-export const createBookingAction = async () => {
-  return { message: 'booking created' }
+export const createBookingAction = async (prevState: {
+  propertyId: string
+  checkIn: Date
+  checkOut: Date
+}) => {
+  const user = await getAuthUser()
+  const { propertyId, checkIn, checkOut } = prevState
+  const property = await db.property.findUnique({
+    where: {
+      id: propertyId,
+    },
+    select: {
+      price: true,
+    },
+  })
+  if (!property) {
+    throw new Error('Property not found')
+  }
+  const { orderTotal, totalNights } = calculateTotals({
+    price: property.price,
+    checkIn,
+    checkOut,
+  })
+  try {
+    const booking = await db.booking.create({
+      data: {
+        checkIn,
+        checkOut,
+        orderTotal,
+        totalNights,
+        profileId: user.id,
+        propertyId,
+      },
+    })
+  } catch (error) {
+    return renderError(error)
+  }
+  redirect(paths.bookings())
 }
