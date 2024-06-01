@@ -14,6 +14,7 @@ import { redirect } from 'next/navigation'
 import { auth, clerkClient, currentUser } from '@clerk/nextjs/server'
 import { paths } from './paths'
 import { uploadImage } from './supabase'
+import { RatingCountType } from './types'
 
 const f = '⇒ actions.ts:'
 
@@ -363,4 +364,26 @@ export const deleteReviewAction = async (prevState: { reviewId: string }) => {
     return renderError(error)
   }
   return { message: 'delete review' }
+}
+
+export const fetchPropertyRating = async (
+  propertyId: string,
+): Promise<RatingCountType> => {
+  const result = await db.review.groupBy({
+    by: ['propertyId'],
+    _avg: {
+      rating: true,
+    },
+    _count: {
+      rating: true,
+    },
+    where: {
+      propertyId,
+    },
+  })
+  const propertyRating = {
+    rating: parseFloat(result[0]?._avg.rating?.toFixed(1) ?? '0'),
+    count: result[0]?._count.rating ?? 0,
+  }
+  return propertyRating
 }

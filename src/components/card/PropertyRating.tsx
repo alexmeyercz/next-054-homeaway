@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { fetchPropertyRating } from '@/utils/actions'
 import React, { type FC } from 'react'
 import { FaStar } from 'react-icons/fa'
 
@@ -9,9 +10,12 @@ type PropertyRatingProps = Readonly<{
   inPage: boolean
 }>
 
-const PropertyRating: FC<PropertyRatingProps> = ({ propertyId, inPage }) => {
-  const rating = 4.7
-  const count = 100
+const PropertyRating: FC<PropertyRatingProps> = async ({
+  propertyId,
+  inPage,
+}) => {
+  const { rating, count } = await fetchPropertyRating(propertyId)
+
   const className = cn(
     'flex gap-1 items-center',
     inPage ? 'text-md' : 'text-xs',

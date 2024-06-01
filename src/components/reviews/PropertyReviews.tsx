@@ -12,7 +12,6 @@ type PropertyReviewsProps = {
 
 const PropertyReviews: FC<PropertyReviewsProps> = async ({ propertyId }) => {
   const reviews = await fetchPropertyReviews(propertyId)
-  console.log(f, 'reviews →', reviews)
   if (reviews.length === 0) {
     return null
   }

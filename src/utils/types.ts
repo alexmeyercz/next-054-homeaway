@@ -16,3 +16,8 @@ export type SearchParamsType = {
   category?: string
   search?: string
 }
+
+export type RatingCountType = {
+  rating: number
+  count: number
+}
