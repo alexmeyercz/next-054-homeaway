@@ -470,7 +470,9 @@ export const fetchBookings = async () => {
   return bookings
 }
 
-export const deleteBookingAction = async (prevState: { bookingId: string }) => {
+export const deleteBookingAction = async (prevState: {
+  bookingId: string
+}): Promise<{ message: string }> => {
   const { bookingId } = prevState
   const user = await getAuthUser()
   try {
