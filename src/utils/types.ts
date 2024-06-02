@@ -31,3 +31,27 @@ export type Booking = {
   checkIn: Date
   checkOut: Date
 }
+
+export type AmenityType = {
+  name: string
+  selected: boolean
+}
+export type RentalType = {
+  id: string
+  name: string
+  tagline: string
+  category: string
+  image: string
+  country: string
+  description: string
+  price: number
+  guests: number
+  bedrooms: number
+  beds: number
+  baths: number
+  // amenities?: AmenityType[]
+  amenities: string
+  createdAt: Date
+  updatedAt: Date
+  profileId: string
+}

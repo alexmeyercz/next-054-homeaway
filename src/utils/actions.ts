@@ -14,7 +14,7 @@ import { redirect } from 'next/navigation'
 import { auth, clerkClient, currentUser } from '@clerk/nextjs/server'
 import { paths } from './paths'
 import { uploadImage } from './supabase'
-import { RatingCountType } from './types'
+import { RatingCountType, RentalType } from './types'
 import { calculateTotals } from './calculateTotals'
 import { create } from 'domain'
 
@@ -550,7 +550,9 @@ export const deleteRentalAction = async (prevState: { propertyId: string }) => {
   }
 }
 
-export const fetchRentalDetails = async (propertyId: string) => {
+export const fetchRentalDetails = async (
+  propertyId: string,
+): Promise<RentalType> => {
   const user = await getAuthUser()
   const rental = await db.property.findUnique({
     where: {
@@ -558,6 +560,11 @@ export const fetchRentalDetails = async (propertyId: string) => {
       profileId: user.id,
     },
   })
+
+  if (!rental) {
+    throw new Error('Rental not found')
+  }
+
   return rental
 }
 
