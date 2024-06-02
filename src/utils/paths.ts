@@ -16,6 +16,9 @@ export const paths = {
   rentalsCreate() {
     return '/rentals/create'
   },
+  rentalEdit(id: string) {
+    return `/rentals/${id}/edit`
+  },
   property(id: string) {
     return `/properties/${id}`
   },

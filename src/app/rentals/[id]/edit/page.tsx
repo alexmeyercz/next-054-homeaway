@@ -48,7 +48,7 @@ const EditRentalPage: FC<EditRentalPageProps> = async ({ params }) => {
 
   return (
     <section>
-      <h1>Edit Property</h1>
+      <h1>Edit Your Property: {name}</h1>
       <div className='rounded-md border p-8 '>
         <ImageInputContainer
           name={name}
@@ -88,37 +88,37 @@ const EditRentalPage: FC<EditRentalPageProps> = async ({ params }) => {
             />
             <CountriesInput defaultValue={country} />
           </div>
+          <TextAreaInput
+            name='description'
+            label='Description'
+            defaultValue={description}
+            rows={3}
+          />
+          <h3>Accommodation Details</h3>
+          <CounterInput
+            detail='guests'
+            defaultValue={guests}
+          />
+          <CounterInput
+            detail='bedrooms'
+            defaultValue={bedrooms}
+          />
+          <CounterInput
+            detail='beds'
+            defaultValue={beds}
+          />
+          <CounterInput
+            detail='baths'
+            defaultValue={baths}
+          />
+          <h3>Amenities</h3>
+          <AmenitiesInput defaultValue={defaultAmenities} />
+          <SubmitButton
+            text='Update Property'
+            className='mt-12'
+          />
         </FormContainer>
       </div>
-      <TextAreaInput
-        name='description'
-        label='Description'
-        defaultValue={description}
-        rows={3}
-      />
-      <h3>Accommodation Details</h3>
-      <CounterInput
-        detail='guests'
-        defaultValue={guests}
-      />
-      <CounterInput
-        detail='bedrooms'
-        defaultValue={bedrooms}
-      />
-      <CounterInput
-        detail='beds'
-        defaultValue={beds}
-      />
-      <CounterInput
-        detail='baths'
-        defaultValue={baths}
-      />
-      <h3>Amenities</h3>
-      <AmenitiesInput defaultValue={defaultAmenities} />
-      <SubmitButton
-        text='Update Property'
-        className='mt-12'
-      />
     </section>
   )
 }
