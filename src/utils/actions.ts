@@ -549,3 +549,22 @@ export const deleteRentalAction = async (prevState: { propertyId: string }) => {
     return renderError(error)
   }
 }
+
+export const fetchRentalDetails = async (propertyId: string) => {
+  const user = await getAuthUser()
+  const rental = await db.property.findUnique({
+    where: {
+      id: propertyId,
+      profileId: user.id,
+    },
+  })
+  return rental
+}
+
+export const updatePropertyAction = async () => {
+  return { message: 'update property successful' }
+}
+
+export const updatePropertyImageAction = async () => {
+  return { message: 'update property image successful' }
+}
