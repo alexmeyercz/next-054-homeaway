@@ -44,6 +44,8 @@ const EditRentalPage: FC<EditRentalPageProps> = async ({ params }) => {
     updatedAt,
   } = property
 
+  const defaultAmenities: Amenity[] = JSON.parse(amenities)
+
   return (
     <section>
       <h1>Edit Property</h1>
@@ -111,6 +113,8 @@ const EditRentalPage: FC<EditRentalPageProps> = async ({ params }) => {
         detail='baths'
         defaultValue={baths}
       />
+      <h3>Amenities</h3>
+      <AmenitiesInput defaultValue={defaultAmenities} />
       <SubmitButton
         text='Update Property'
         className='mt-12'

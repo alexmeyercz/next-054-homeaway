@@ -14,8 +14,14 @@ type AmenitiesInputProps = Readonly<{
 const AmenitiesInput: FC<AmenitiesInputProps> = ({
   defaultValue = amenities,
 }) => {
-  const [selectedAmenities, setSelectedAmenities] =
-    useState<Amenity[]>(defaultValue)
+  const amenitiesWithIcons = defaultValue?.map(({ name, selected }) => ({
+    name,
+    selected,
+    icon: amenities.find((amenity) => amenity.name === name)!.icon,
+  }))
+  const [selectedAmenities, setSelectedAmenities] = useState<Amenity[]>(
+    amenitiesWithIcons || amenities,
+  )
 
   const handleChange: (amenity: Amenity) => void = (amenity) => {
     setSelectedAmenities((prev) => {
@@ -54,7 +60,7 @@ const AmenitiesInput: FC<AmenitiesInputProps> = ({
                 htmlFor={name}
                 className='flex items-center gap-x-2 text-sm font-medium capitalize leading-none'
               >
-                <amenity.icon className='h-4 w-4' /> {name}
+                {name}
               </Label>
             </div>
           )

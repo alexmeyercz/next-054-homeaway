@@ -32,10 +32,6 @@ export type Booking = {
   checkOut: Date
 }
 
-export type AmenityType = {
-  name: string
-  selected: boolean
-}
 export type RentalType = {
   id: string
   name: string
@@ -49,7 +45,6 @@ export type RentalType = {
   bedrooms: number
   beds: number
   baths: number
-  // amenities?: AmenityType[]
   amenities: string
   createdAt: Date
   updatedAt: Date
