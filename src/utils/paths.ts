@@ -34,4 +34,10 @@ export const paths = {
   bookings() {
     return '/bookings'
   },
+  reservations() {
+    return '/reservations'
+  },
+  admin() {
+    return '/admin'
+  },
 }

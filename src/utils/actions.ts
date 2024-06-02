@@ -63,7 +63,6 @@ export const createPropertyAction = async (
         profileId: user.id,
       },
     })
-    return { message: 'Property created successfully' }
   } catch (error) {
     return renderError(error)
   }
